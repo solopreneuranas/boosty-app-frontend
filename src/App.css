@@ -1,0 +1,108 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter' !important;
+}
+
+body {
+  background-color: #F4F5FF;
+}
+
+.root {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
+  background-color: transparent !important;
+}
+
+.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.css-1mbunh-MuiPaper-root {
+  box-shadow: none !important;
+  padding: 2% !important;
+  border-radius: 25px !important;
+  border-bottom: 0px !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+  background-color: #53569a !important
+}
+
+.css-1ex1afd-MuiTableCell-root {
+  padding: 27px 22px !important;
+}
+
+.css-2ulfj5-MuiTypography-root {
+  font-weight: 600 !important;
+  font-family: 'Poppins' !important;
+}
+
+.globalButton {
+  box-shadow: none !important;
+  background: #004cef !important;
+  border-radius: 10px !important;
+  margin-top: 2% !important;
+  margin-left: 3% !important;
+  color: white !important;
+  padding: 2% 6% !important
+}
+
+.root {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100vw;
+  margin: auto;
+  overflow-x: hidden !important;
+}
+
+.center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.right {
+  display: flex !important;
+  justify-content: right !important;
+  align-items: center !important;
+}
+
+.gradientText {
+  background: linear-gradient(to right, blue, #8000ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  box-shadow: 0 3px 10px #ededed;
+  width: fit-content !important;
+} */
