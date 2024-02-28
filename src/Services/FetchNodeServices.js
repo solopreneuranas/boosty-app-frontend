@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverURL = "http://localhost:3500"
+const serverURL = "http://3.109.154.56:3500"
 
 const postData = async (url, body) => {
     try {
