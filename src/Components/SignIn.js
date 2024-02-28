@@ -161,14 +161,14 @@ export default function SignIn() {
                         {
                             matches_md ?
                                 <>
-                                    <Grid item md={12} style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+                                    <Grid item md={12} style={{ display: 'flex', width: '100%', justifyContent: 'center', paddingLeft: 0 }}>
                                         <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
                                     </Grid>
                                 </>
                                 :
                                 <></>
                         }
-                        <Grid item md={12} style={{ width: '100%' }}>
+                        <Grid item md={12} style={{ width: '100%', paddingLeft: 0 }}>
                             <Typography style={{
                                 fontSize: '26px',
                                 fontWeight: '600',

@@ -116,10 +116,10 @@ export default function AdminLogin() {
             <Grid container spacing={1} style={{ margin: 0 }}>
                 <Grid item md={12} style={loginFormGrid}>
                     <Grid container spacing={3} style={loginForm}>
-                        <Grid item md={12} style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-                            <img src='https://www.tryboosty.com/images/boosty-gradient-logo.svg' style={{ width: 150 }} />
+                        <Grid item md={12} style={{ display: 'flex', width: '100%', justifyContent: 'center', paddingLeft: 0 }}>
+                            <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
                         </Grid>
-                        <Grid item md={12} style={{ width: '100%' }}>
+                        <Grid item md={12} style={{ width: '100%', paddingLeft: 0 }}>
                             <Typography style={{
                                 fontSize: '26px',
                                 fontWeight: '600',

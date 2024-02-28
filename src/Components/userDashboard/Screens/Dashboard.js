@@ -143,7 +143,7 @@ export default function Dashboard(props) {
                                 }}
                             >
                                 <Grid item md={12} style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-                                    <img src='https://www.tryboosty.com/images/boosty-gradient-logo.svg' style={{ width: 150 }} />
+                                    <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
                                 </Grid>
 
                                 <Grid style={{ background: matches_md ? 'white' : 'white', color: 'black', borderRadius: '10px', display: "flex", justifyContent: matches_md ? "center" : "left", alignItems: 'center', padding: '3%', marginLeft: '5%' }}>

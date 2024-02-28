@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// const serverURL = "http://3.109.154.56:3500"
 const serverURL = "https://boosty-app-backend.onrender.com"
 
 const postData = async (url, body) => {
