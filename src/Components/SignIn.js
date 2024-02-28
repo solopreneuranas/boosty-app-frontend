@@ -162,7 +162,7 @@ export default function SignIn() {
                             matches_md ?
                                 <>
                                     <Grid item md={12} style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-                                        <img src='https://www.tryboosty.com/images/boosty-gradient-logo.svg' style={{ width: 150 }} />
+                                        <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
                                     </Grid>
                                 </>
                                 :

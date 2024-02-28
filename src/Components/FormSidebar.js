@@ -5,7 +5,7 @@ export default function FormSidebar(props) {
         <div style={{ width: '100%' }}>
             <Grid container spacing={3}>
                 <Grid item md={12}>
-                    <img src='https://www.tryboosty.com/images/boosty-gradient-logo.svg' style={{ width: 150 }} />
+                    <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
                 </Grid>
                 <Grid item md={12} style={{ marginTop: '5%' }}>
                     <img src='/images/login-image.png' style={{ width: '100%' }} />
