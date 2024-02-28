@@ -56,7 +56,7 @@ export default function StartCompany(props) {
 
 
     return (
-        <div style={{ width: '100%', padding: 0 }}>
+        <div style={{ width: '100%', padding: 0, marginTop: '4%' }}>
             {startCompany()}
         </div>
     )

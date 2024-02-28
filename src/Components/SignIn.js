@@ -1,6 +1,6 @@
 import '../.././src/App.css'
 import * as React from 'react';
-import { Typography } from '@material-ui/core';
+import { CircularProgress, Typography } from '@material-ui/core';
 import { Grid, TextField, Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -47,6 +47,7 @@ export default function SignIn() {
     const matches_sm = useMediaQuery(theme.breakpoints.down('sm'));
     const [showPassword, setShowPassword] = useState(false)
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const [loading, setLoading] = useState(false)
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)
     const handleMouseDownPassword = (event) => {
@@ -71,6 +72,7 @@ export default function SignIn() {
     }
 
     const handleLoginAccount = async () => {
+        setLoading(true)
         var error = validation()
         if (error === false) {
             var body = { 'email': email, 'password': password }
@@ -83,6 +85,7 @@ export default function SignIn() {
                     timer: 2000,
                     toast: true
                 })
+                setLoading(false)
                 navigate('/dashboard')
             }
             else {
@@ -227,7 +230,15 @@ export default function SignIn() {
                                     padding: '2% 0',
                                     fontSize: '18px',
                                     fontWeight: '600'
-                                }}>Sign in</Button>
+                                }}>
+                                Sign in
+                                {
+                                    loading ?
+                                        <><CircularProgress style={{ color: 'white', marginLeft: '5%' }} /></>
+                                        :
+                                        <></>
+                                }
+                            </Button>
                         </Grid>
                         <Grid item md={8} style={{ padding: 0, marginTop: '6%', fontWeight: '600', cursor: 'pointer' }} onClick={() => navigate('/signup')}>
                             <font style={{ fontSize: '15px', opacity: '80%' }}>New customer? <font style={{ color: '#2c2c2c' }}>sign up in here</font></font>
