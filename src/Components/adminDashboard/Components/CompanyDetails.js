@@ -1,4 +1,4 @@
-import { Grid, Button, TextField } from "@material-ui/core";
+import { Grid, Button, TextField, CircularProgress } from "@material-ui/core";
 import { serverURL, postData } from "../../../Services/FetchNodeServices";
 import { useState, useEffect } from "react";
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
@@ -96,6 +96,8 @@ export default function CompanyDetails(props) {
     const [boiStatus, setBoiStatus] = useState('')
     const [agreementStatus, setAgreementStatus] = useState('')
     const [bankStatus, setBankStatus] = useState('')
+
+    const [loading, setLoading] = useState(false)
 
     const [memberData, setMemberData] = useState([
         {
@@ -276,6 +278,7 @@ export default function CompanyDetails(props) {
     ]
 
     const handleUpdateCompanyDetails = async () => {
+        setLoading(true)
         var body = {
             '_id': company._id,
             'companyname': companyName,
@@ -304,6 +307,7 @@ export default function CompanyDetails(props) {
         }
         var response = await postData('company/update-company', body)
         if (response.status === true) {
+            setLoading(false)
             Swal.fire({
                 icon: 'success',
                 toast: true,
@@ -312,6 +316,7 @@ export default function CompanyDetails(props) {
             })
         }
         else {
+            setLoading(false)
             Swal.fire({
                 icon: 'error',
                 title: 'Company details not updated!'
@@ -320,19 +325,21 @@ export default function CompanyDetails(props) {
     }
 
     const handleUpdateCompanyStatus = async () => {
+        setLoading(true)
         var body = {
             '_id': orderStatus._id,
             'userid': company.userid,
-            'agent': agentStatus,
-            'address': addressStatus,
-            'formation': formationStatus,
-            'ein': einStatus,
-            'boi': boiStatus,
-            'agreement': agreementStatus,
-            'bank': bankStatus
+            'agent': agentStatus.length === 0 ? orderStatus?.agentStatus : agentStatus,
+            'address': addressStatus.length === 0 ? orderStatus?.addressStatus : addressStatus,
+            'formation': formationStatus.length === 0 ? orderStatus?.formationStatus : formationStatus,
+            'ein': einStatus.length === 0 ? orderStatus?.einStatus : einStatus,
+            'boi': boiStatus.length === 0 ? orderStatus?.boiStatus : boiStatus,
+            'agreement': agreementStatus.length === 0 ? orderStatus?.agreementStatus : agreementStatus,
+            'bank': bankStatus.length === 0 ? orderStatus?.bankStatus : bankStatus
         }
         var response = await postData('orderstatus/update-order-status', body)
         if (response.status === true) {
+            setLoading(false)
             Swal.fire({
                 icon: 'success',
                 toast: true,
@@ -341,6 +348,7 @@ export default function CompanyDetails(props) {
             })
         }
         else {
+            setLoading(false)
             Swal.fire({
                 icon: 'error',
                 title: 'Company details not updated!'
@@ -659,8 +667,12 @@ export default function CompanyDetails(props) {
                         <h3 style={gradientText}>Edit Company Info</h3>
                     </Grid>
                     <Grid item sm={6} style={{ display: 'flex', justifyContent: 'right' }}>
-                        <Button variant="primary" type="submit" onClick={handleUpdateCompanyDetails} style={{ width: matches_md ? '100%' : '', boxShadow: 'none', background: 'linear-gradient(to right, blue, #8000ff)', borderRadius: matches_md ? 5 : 10, height: 50, marginTop: '2%', marginLeft: matches_md ? '' : '1%', color: 'white', padding: matches_md ? '3% 6%' : '1% 2%' }}>
+                        <Button variant="primary" type="submit" onClick={handleUpdateCompanyDetails} style={{ width: matches_md ? '100%' : '', boxShadow: 'none', background: 'linear-gradient(to right, blue, #8000ff)', borderRadius: matches_md ? 5 : 10, height: 50, marginTop: '2%', marginLeft: matches_md ? '' : '1%', color: 'white', padding: matches_md ? '3% 6%' : '1% 4%' }}>
                             Update Company
+                            {loading ?
+                                <CircularProgress style={{ color: 'white', marginLeft: 5 }} /> :
+                                ''
+                            }
                         </Button>
                         <Button onClick={handleLoginAccount} variant="outlined" style={{ width: matches_md ? '100%' : '', boxShadow: 'none', borderRadius: matches_md ? 5 : 10, marginTop: '2%', height: 50, marginLeft: matches_md ? '' : '1%', color: '#8000ff', padding: matches_md ? '3% 6%' : '1% 2%', border: '2px solid #8000ff' }}>
                             Login to Dashboard
@@ -1013,6 +1025,10 @@ export default function CompanyDetails(props) {
 
                 <Button variant="primary" type="submit" onClick={handleUpdateCompanyStatus} style={{ width: matches_md ? '100%' : '', boxShadow: 'none', background: 'linear-gradient(to right, blue, #8000ff)', borderRadius: matches_md ? 5 : 10, height: 50, marginTop: '2%', color: 'white', padding: matches_md ? '3% 6%' : '1% 2%' }}>
                     Update Company Status
+                    {loading ?
+                        <CircularProgress style={{ color: 'white', marginLeft: 5 }} /> :
+                        ''
+                    }
                 </Button>
             </div>
         )
