@@ -444,7 +444,7 @@ export default function RegisterCompany(props) {
                 formData.append('zipcode', zipCode)
                 formData.append('paymentid', response.razorpay_payment_id)
                 formData.append('companystatus', 'Pending')
-                formData.append('orderamount', selectedState.fee)
+                formData.append('orderamount', orderAmount)
                 formData.append('orderdate', new Date())
                 formData.append('membersdata', JSON.stringify(memberData))
                 formData.append('addons', JSON.stringify(addons))
@@ -899,6 +899,7 @@ export default function RegisterCompany(props) {
                                 zipCode={zipCode}
                                 address={address}
                                 orderAmount={orderAmount}
+                                setOrderAmount={setOrderAmount}
                                 addons={addons}
                             />
                             <Grid container spacing={0} style={{ marginTop: '5%' }}>

@@ -142,6 +142,10 @@ export default function Cart(props) {
     const discountPercentage = 25;
     const finalCost = cartServicesCost - (cartServicesCost * discountPercentage / 100);
 
+    useEffect(() => {
+        props.setOrderAmount(finalCost)
+    }, [finalCost])
+
     const options = {
         key: "rzp_test_GQ6XaPC6gMPNwH", // Enter the Key ID generated from the Dashboard
         amount: finalCost * 100,

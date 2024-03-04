@@ -636,9 +636,29 @@ export default function CompanyDetails(props) {
         );
     }
 
+    const handleDownloadPassport = async (filename) => {
+        const fileUrl = `${serverURL}/images/${filename}`
+        const response = await fetch(fileUrl)
+        const blob = await response.blob()
+        const link = document.createElement('a')
+        const blobUrl = window.URL.createObjectURL(blob);
+        link.href = blobUrl;
+        link.download = filename
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        window.URL.revokeObjectURL(blobUrl);
+    }
+
+    console.log('company: ', company)
+
     const unChangeAbleCompanyInfo = [
         {
-            title: 'Formation Date',
+            title: 'Passport',
+            para: 'Download Passport'
+        },
+        {
+            title: 'Order Date',
             para: formattedDate
         },
         {
@@ -821,7 +841,12 @@ export default function CompanyDetails(props) {
                                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>{item.title}</h3>
                                     </Grid>
                                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                                        <p>{item.para}</p>
+                                        {
+                                            item?.para === 'Download Passport' ?
+                                                <Button variant="outlined" onClick={() => handleDownloadPassport(company?.userpassport)}>{item.para}</Button>
+                                                :
+                                                <p>{item.para}</p>
+                                        }
                                     </Grid>
                                 </Grid>
 

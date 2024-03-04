@@ -1,6 +1,6 @@
 import '../.././src/App.css'
 import * as React from 'react';
-import { Typography } from '@material-ui/core';
+import { CircularProgress, Typography } from '@material-ui/core';
 import { Grid, TextField, Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -38,6 +38,7 @@ export default function AdminLogin() {
     const matches_md = useMediaQuery(theme.breakpoints.down('md'));
     const matches_sm = useMediaQuery(theme.breakpoints.down('sm'));
     const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)
     const handleMouseDownPassword = (event) => {
@@ -62,11 +63,13 @@ export default function AdminLogin() {
     }
 
     const handleLoginAccount = async () => {
+        setLoading(true)
         var error = validation()
         if (error === false) {
             var body = { 'email': email, 'password': password }
             var response = await postData('admin/login', body)
             if (response.status === true) {
+                setLoading(false)
                 localStorage.setItem('Admin', JSON.stringify(response.data))
                 Swal.fire({
                     icon: 'success',
@@ -76,6 +79,7 @@ export default function AdminLogin() {
                 navigate('/admindashboard')
             }
             else {
+                setLoading(false)
                 Swal.fire({
                     icon: 'error',
                     title: 'Invalid credentails!'
@@ -175,7 +179,14 @@ export default function AdminLogin() {
                                     padding: '2% 0',
                                     fontSize: '18px',
                                     fontWeight: '600'
-                                }}>Sign in</Button>
+                                }}>Sign in
+                                {
+                                    loading ?
+                                        <><CircularProgress style={{ color: 'white', marginLeft: '5%' }} /></>
+                                        :
+                                        <></>
+                                }
+                            </Button>
                         </Grid>
                     </Grid>
                 </Grid>

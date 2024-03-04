@@ -66,7 +66,7 @@ export default function MyCompany(props) {
                 <div>
                     <Grid onClick={() => handleCompanyClick(item)} container spacing={1} style={{ marginTop: '5%' }}>
                         <Grid item md={12} style={{ width: '100%', borderRadius: 10, background: 'white', padding: matches_md ? '6%' : '3%', boxShadow: '3px 3px 20px #ededed', position: "relative", cursor: "pointer" }}>
-                            <div style={{ position: "absolute", padding: matches_md ? '2% 0' : '1% 2%', borderRadius: matches_md ? 5 : 10, top: '8%', right: '2%', background: item.companystatus == 'Completed' ? '#8eff6b' : item.companystatus == 'In Progress' ? '#91edff' : '#ffe29e', color: item.companystatus == 'Completed' ? 'green' : item.companystatus == 'In Progress' ? '#0293b0' : '#cf8506', width: 125, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%' }}>
+                            <div style={{ position: "absolute", padding: matches_md ? '2% 0' : '1% 2%', borderRadius: matches_md ? 5 : 10, top: '8%', right: '2%', background: item.companystatus === 'Completed' ? '#8eff6b' : item.companystatus == 'In Progress' ? '#91edff' : '#ffe29e', color: item.companystatus == 'Completed' ? 'green' : item.companystatus == 'In Progress' ? '#0293b0' : '#cf8506', width: 125, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%' }}>
                                 {
                                     item.companystatus == 'Completed' ?
                                         <>

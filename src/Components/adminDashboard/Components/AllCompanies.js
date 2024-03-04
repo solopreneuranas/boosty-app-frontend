@@ -77,7 +77,7 @@ export default function AllCompanies(props) {
                         var formattedDate = `${day} ${months[month].slice(0, 3)} ${year}`
 
                         return (
-                            <div style={{ width: '100%', padding: '1% 0', borderBottom: '1px solid gainsboro' }}>
+                            <div style={{ width: '100%', padding: '1% 0', borderBottom: i % 2 !== 0 ? '1px solid gainsboro' : '' }}>
                                 <Grid onClick={() => handleCompanyClick(item)} container spacing={1} style={{ cursor: "pointer", width: '100%', margin: 0, padding: '1%', background: 'white', display: 'flex', alignItems: 'center' }}>
                                     <Grid item xs={1}>
                                         {i + 1}

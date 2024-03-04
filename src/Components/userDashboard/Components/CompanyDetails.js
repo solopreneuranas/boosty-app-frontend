@@ -105,7 +105,7 @@ export default function CompanyDetails(props) {
             para: company.companydescp
         },
         {
-            title: 'Formation Date',
+            title: 'Order Date',
             para: formattedDate
         },
         {
