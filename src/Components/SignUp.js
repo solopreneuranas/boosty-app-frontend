@@ -18,6 +18,7 @@ import { postData } from '../Services/FetchNodeServices';
 import FormSidebar from './FormSidebar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const useStyles = makeStyles((theme) => ({
     roundedTextField: {
@@ -42,6 +43,7 @@ export default function SignUp() {
     const matches_md = useMediaQuery(theme.breakpoints.down('md'));
     const matches_sm = useMediaQuery(theme.breakpoints.down('sm'));
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const [loadingPage, setLoadingPage] = useState(false)
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)
     const handleMouseDownPassword = (event) => {
@@ -74,12 +76,14 @@ export default function SignUp() {
     }
 
     const handleCreateAccount = async () => {
+        setLoadingPage(true)
         var error = validation()
         if (error === false) {
             var body = { 'firstname': firstName, 'lastname': lastName, 'mobileno': mobileNo, 'email': email, 'password': password }
             var response = await postData('user/create-account', body)
             if (response.status === true) {
                 //localStorage.setItem('User', JSON.stringify([body]))
+                setLoadingPage(false)
                 Swal.fire({
                     icon: 'success',
                     toast: true,
@@ -89,6 +93,7 @@ export default function SignUp() {
                 navigate('/login', { state: { status: true } })
             }
             else {
+                setLoadingPage(false)
                 Swal.fire({
                     icon: 'error',
                     title: 'Account not created!'
@@ -120,129 +125,143 @@ export default function SignUp() {
 
     return (
         <div className='root' style={{ height: '100%' }}>
-            <Grid container spacing={1} style={{ margin: 0 }}>
-                {
-                    matches_md ?
-                        <></>
-                        :
-                        <>
-                            <Grid item md={3} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3%', background: '#F7F0FF', color: 'black' }}>
-                                <FormSidebar
-                                    title="Create account & manage Tasks easily"
-                                    para="Choose between JSON Web Token, Firebase, AWS Amplify or Auth0. Regular login/register functionality is also available."
-                                    subTitle="Want to switch auth methods?"
-                                    subPara="It only takes seconds. There is a documentation section showing how to do exactly that. Read docs"
-                                />
-                            </Grid>
-                        </>
-                }
-                <Grid item md={9} style={loginFormGrid}>
-                    <Grid container spacing={3} style={loginForm}>
-                        {
-                            matches_md ?
-                                <>
-                                    <Grid item md={12} style={{ display: 'flex', width: '100%', justifyContent: 'center', paddingLeft: 0 }}>
-                                        <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
-                                    </Grid>
-                                </>
-                                :
-                                <></>
-                        }
-                        <Grid item md={12} style={{ width: '100%', paddingLeft: 0 }}>
-                            <Typography style={{
-                                fontSize: '26px',
-                                fontWeight: '600',
-                                marginBottom: '0',
-                                textAlign: 'center'
-                            }}>Sign up</Typography>
-                            <p style={{ marginBottom: '4%', textAlign: 'center', opacity: '70%' }}>Fill in the fields below to create your account.</p><br />
-                        </Grid>
-
-                        <Grid container spacing={matches_md ? 2 : 3}>
-                            <Grid item xs={6} style={{ width: '100%' }}>
-                                <TextField
-                                    error={getErrors.firstName}
-                                    helperText={getErrors.firstName}
-                                    onFocus={() => handleError('', 'firstName')}
-                                    label='First name' variant='outlined' fullWidth className={classes.roundedTextField} onChange={(event) => setFirstName(event.target.value)} />
-                            </Grid>
-
-                            <Grid item xs={6} style={{ width: '100%' }}>
-                                <TextField
-                                    label='Last name' variant='outlined' fullWidth className={classes.roundedTextField} onChange={(event) => setLastName(event.target.value)} />
-                            </Grid>
-                        </Grid>
-
-                        <Grid container spacing={matches_md ? 2 : 3} style={{ marginTop: '2%' }}>
-                            <Grid item xs={6} style={{ width: '100%' }}>
-                                <TextField
-                                    error={getErrors.email}
-                                    helperText={getErrors.email}
-                                    onFocus={() => handleError('', 'email')}
-                                    label='Email' variant='outlined' fullWidth className={classes.roundedTextField} onChange={(event) => setEmail(event.target.value)} />
-                            </Grid>
-
-                            <Grid item xs={6} style={{ width: '100%' }}>
-                                <TextField
-                                    error={getErrors.mobileNo}
-                                    helperText={getErrors.mobileNo}
-                                    onFocus={() => handleError('', 'mobileNo')}
-                                    label='Mobile no' variant='outlined' fullWidth className={classes.roundedTextField} onChange={(event) => setMobileNo(event.target.value)} />
-                            </Grid>
-                        </Grid>
-
-                        <Grid container spacing={3}>
-                        </Grid>
-
-                        <Grid item md={12} style={{ padding: 0, marginTop: '5%', width: '100%' }}>
-                            <FormControl fullWidth variant="outlined" className={classes.roundedTextField}>
-                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                <OutlinedInput
-                                    error={getErrors.password}
-                                    onFocus={() => handleError('', 'password')}
-                                    onChange={(event) => setPassword(event.target.value)}
-                                    type={showPassword ? 'text' : 'password'}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                    label="Password"
-                                />
-                            </FormControl>
-                            <p style={{ color: '#FF0000', fontSize: '12.3px', marginLeft: '15px', marginTop: '0' }}>{getErrors.password}</p>
-                        </Grid>
-                        <Grid item md={12} style={{ padding: 0, marginTop: '3%', width: '100%' }}>
-                            <div>
-                                <Checkbox {...label} defaultChecked style={{ paddingLeft: 0 }} />
-                                <font style={{ fontSize: '15px', opacity: '80%' }}>I accept the <font style={{ color: '#2c2c2c' }}>terms and conditions.</font></font>
+            {
+                loadingPage ?
+                    <>
+                        <div style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
+                            <div style={{ width: 250, marginTop: '2%' }}>
+                                <LinearProgress color="secondary" />
                             </div>
+                        </div>
+                    </>
+                    :
+                    <>
+                        <Grid container spacing={1} style={{ margin: 0 }}>
+                            {
+                                matches_md ?
+                                    <></>
+                                    :
+                                    <>
+                                        <Grid item md={3} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3%', background: '#F7F0FF', color: 'black' }}>
+                                            <FormSidebar
+                                                title="Create account & manage Tasks easily"
+                                                para="Choose between JSON Web Token, Firebase, AWS Amplify or Auth0. Regular login/register functionality is also available."
+                                                subTitle="Want to switch auth methods?"
+                                                subPara="It only takes seconds. There is a documentation section showing how to do exactly that. Read docs"
+                                            />
+                                        </Grid>
+                                    </>
+                            }
+                            <Grid item md={9} style={loginFormGrid}>
+                                <Grid container spacing={3} style={loginForm}>
+                                    {
+                                        matches_md ?
+                                            <>
+                                                <Grid item md={12} style={{ display: 'flex', width: '100%', justifyContent: 'center', paddingLeft: 0 }}>
+                                                    <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
+                                                </Grid>
+                                            </>
+                                            :
+                                            <></>
+                                    }
+                                    <Grid item md={12} style={{ width: '100%', paddingLeft: 0 }}>
+                                        <Typography style={{
+                                            fontSize: '26px',
+                                            fontWeight: '600',
+                                            marginBottom: '0',
+                                            textAlign: 'center'
+                                        }}>Sign up</Typography>
+                                        <p style={{ marginBottom: '4%', textAlign: 'center', opacity: '70%' }}>Fill in the fields below to create your account.</p><br />
+                                    </Grid>
+
+                                    <Grid container spacing={matches_md ? 2 : 3}>
+                                        <Grid item xs={6} style={{ width: '100%' }}>
+                                            <TextField
+                                                error={getErrors.firstName}
+                                                helperText={getErrors.firstName}
+                                                onFocus={() => handleError('', 'firstName')}
+                                                label='First name' variant='outlined' fullWidth className={classes.roundedTextField} onChange={(event) => setFirstName(event.target.value)} />
+                                        </Grid>
+
+                                        <Grid item xs={6} style={{ width: '100%' }}>
+                                            <TextField
+                                                label='Last name' variant='outlined' fullWidth className={classes.roundedTextField} onChange={(event) => setLastName(event.target.value)} />
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid container spacing={matches_md ? 2 : 3} style={{ marginTop: '2%' }}>
+                                        <Grid item xs={6} style={{ width: '100%' }}>
+                                            <TextField
+                                                error={getErrors.email}
+                                                helperText={getErrors.email}
+                                                onFocus={() => handleError('', 'email')}
+                                                label='Email' variant='outlined' fullWidth className={classes.roundedTextField} onChange={(event) => setEmail(event.target.value)} />
+                                        </Grid>
+
+                                        <Grid item xs={6} style={{ width: '100%' }}>
+                                            <TextField
+                                                error={getErrors.mobileNo}
+                                                helperText={getErrors.mobileNo}
+                                                onFocus={() => handleError('', 'mobileNo')}
+                                                label='Mobile no' variant='outlined' fullWidth className={classes.roundedTextField} onChange={(event) => setMobileNo(event.target.value)} />
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid container spacing={3}>
+                                    </Grid>
+
+                                    <Grid item md={12} style={{ padding: 0, marginTop: '5%', width: '100%' }}>
+                                        <FormControl fullWidth variant="outlined" className={classes.roundedTextField}>
+                                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                            <OutlinedInput
+                                                error={getErrors.password}
+                                                onFocus={() => handleError('', 'password')}
+                                                onChange={(event) => setPassword(event.target.value)}
+                                                type={showPassword ? 'text' : 'password'}
+                                                endAdornment={
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                }
+                                                label="Password"
+                                            />
+                                        </FormControl>
+                                        <p style={{ color: '#FF0000', fontSize: '12.3px', marginLeft: '15px', marginTop: '0' }}>{getErrors.password}</p>
+                                    </Grid>
+                                    <Grid item md={12} style={{ padding: 0, marginTop: '3%', width: '100%' }}>
+                                        <div>
+                                            <Checkbox {...label} defaultChecked style={{ paddingLeft: 0 }} />
+                                            <font style={{ fontSize: '15px', opacity: '80%' }}>I accept the <font style={{ color: '#2c2c2c' }}>terms and conditions.</font></font>
+                                        </div>
+                                    </Grid>
+                                    <Grid item md={12} variant='contained' style={{ width: '100%', padding: 0, marginTop: '4%' }}>
+                                        <Button
+                                            onClick={handleCreateAccount}
+                                            fullWidth style={{
+                                                background: 'linear-gradient(to right, blue, #8000ff)',
+                                                color: 'white',
+                                                borderRadius: '15px',
+                                                padding: '2% 0',
+                                                fontSize: '18px',
+                                                fontWeight: '600'
+                                            }}>Sign up</Button>
+                                    </Grid>
+                                    <Grid item md={8} style={{ padding: 0, marginTop: '6%', fontWeight: '600', cursor: 'pointer' }} onClick={() => navigate('/login')}>
+                                        <font style={{ fontSize: '15px', opacity: '80%' }}>Already have an account <font style={{ color: '#2c2c2c' }}>sign in here</font></font>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
-                        <Grid item md={12} variant='contained' style={{ width: '100%', padding: 0, marginTop: '4%' }}>
-                            <Button
-                                onClick={handleCreateAccount}
-                                fullWidth style={{
-                                    background: 'linear-gradient(to right, blue, #8000ff)',
-                                    color: 'white',
-                                    borderRadius: '15px',
-                                    padding: '2% 0',
-                                    fontSize: '18px',
-                                    fontWeight: '600'
-                                }}>Sign up</Button>
-                        </Grid>
-                        <Grid item md={8} style={{ padding: 0, marginTop: '6%', fontWeight: '600', cursor: 'pointer' }} onClick={() => navigate('/login')}>
-                            <font style={{ fontSize: '15px', opacity: '80%' }}>Already have an account <font style={{ color: '#2c2c2c' }}>sign in here</font></font>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
+                    </>
+            }
         </div >
     )
 
