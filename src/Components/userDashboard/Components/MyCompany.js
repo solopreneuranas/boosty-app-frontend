@@ -107,11 +107,11 @@ export default function MyCompany(props) {
                     <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 22 : 25 }}>My Company</h3>
                     <p style={{ margin: 0, opacity: '70%', marginTop: '1%' }}>View company information and account details</p>
                 </Grid>
-                <Grid item md={6} style={{ width: '100%', display: "flex", justifyContent: matches_md ? 'left' : 'right', marginTop: matches_md ? '2%' : '' }}>
+                {/* <Grid item md={6} style={{ width: '100%', display: "flex", justifyContent: matches_md ? 'left' : 'right', marginTop: matches_md ? '2%' : '' }}>
                     <Button onClick={handleNewCompany} startIcon={<AddIcon />} variant="outlined" style={{ borderRadius: matches_md ? 5 : 12, fontSize: 13, padding: matches_md ? '2% 3%' : '0 3%', color: '#7A00FF', border: '2px solid #7A00FF' }}>
                         New Company
                     </Button>
-                </Grid>
+                </Grid> */}
             </Grid>
             {
                 loadingStatus == true ?

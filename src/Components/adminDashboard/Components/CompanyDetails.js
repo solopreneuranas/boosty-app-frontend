@@ -39,7 +39,7 @@ export default function CompanyDetails(props) {
     const classes = useStyles();
     var location = useLocation()
     var company = location?.state?.company
-    let orderStatus = location?.state?.orderStatus
+    // let orderStatus = location?.state?.orderStatus
 
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
@@ -92,18 +92,17 @@ export default function CompanyDetails(props) {
     const [memberFirstName, setMemberFirstName] = useState(company.memberfirstname)
     const [memberLastName, setMemberLastName] = useState(company.memberlastname)
     const [memberOwnership, setMemberOwnership] = useState(company.memberownership)
-
-    // const [orderStatus, setOrderStatus] = useState({})
-    console.log('orderStatus: ', orderStatus);
-    const [agentStatus, setAgentStatus] = useState(orderStatus?.agent)
-    const [addressStatus, setAddressStatus] = useState(orderStatus?.address)
-    const [formationStatus, setFormationStatus] = useState(orderStatus?.formation)
-    const [einStatus, setEinStatus] = useState(orderStatus?.ein)
-    const [boiStatus, setBoiStatus] = useState(orderStatus?.boi)
-    const [agreementStatus, setAgreementStatus] = useState(orderStatus?.agreement)
-    const [bankStatus, setBankStatus] = useState(orderStatus?.bank)
-
     const [loading, setLoading] = useState(false)
+
+    let companyStatusObj = company?.orderStatus[0]
+  
+    const [agentStatus, setAgentStatus] = useState(companyStatusObj?.agent)
+    const [addressStatus, setAddressStatus] = useState(companyStatusObj?.address)
+    const [formationStatus, setFormationStatus] = useState(companyStatusObj?.formation)
+    const [einStatus, setEinStatus] = useState(companyStatusObj?.ein)
+    const [boiStatus, setBoiStatus] = useState(companyStatusObj?.boi)
+    const [agreementStatus, setAgreementStatus] = useState(companyStatusObj?.agreement)
+    const [bankStatus, setBankStatus] = useState(companyStatusObj?.bank)
 
     const [memberData, setMemberData] = useState([
         {
@@ -246,14 +245,6 @@ export default function CompanyDetails(props) {
         }
     }
 
-    // const fetchOrderStatus = async () => {
-    //     var body = { 'userid': company.userid }
-    //     var response = await postData('orderstatus/display_order_status_by_user', body)
-    //     if (response.status === true) {
-    //         setOrderStatus(response.data[0])
-    //     }
-    // }
-
     const fetchMailsByUser = async () => {
         var body = { 'userid': company.userid }
         var response = await postData('mailroom/display_all_mails_by_user', body)
@@ -333,7 +324,7 @@ export default function CompanyDetails(props) {
     const handleUpdateCompanyStatus = async () => {
         setLoading(true)
         var body = {
-            '_id': orderStatus._id,
+            '_id': companyStatusObj?._id,
             'userid': company.userid,
             'agent': agentStatus,
             'address': addressStatus,
@@ -1033,7 +1024,6 @@ export default function CompanyDetails(props) {
             setBankStatus(bankStatus === 'True' ? 'False' : 'True')
         }
     }
-    console.log('agentNew', agentStatus);
 
     const orderStatusCompany = () => {
         return (
@@ -1054,7 +1044,7 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Registered Agent Assigned</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        {/* <TextField label={orderStatus?.agent} onChange={(e) => setAgentStatus(e.target.value)} className={classes.roundedTextField} value={agentStatus} variant="outlined" /> */}
+                        {/* <TextField label={agentStatus} onChange={(e) => setAgentStatus(e.target.value)} className={classes.roundedTextField} value={agentStatus} variant="outlined" /> */}
                         <Switch {...label} defaultChecked={agentStatus === 'True' ? true : false} onChange={(e) => handleSwitch(e, 'agent')} />
                     </Grid>
                 </Grid>

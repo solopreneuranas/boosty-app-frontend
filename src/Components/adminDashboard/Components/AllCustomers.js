@@ -47,19 +47,19 @@ export default function AllCustomers(props) {
             customers.map((item, i) => {
 
                 return (
-                    <div style={{ width: '100%', padding: '1% 0', borderBottom: i % 2 !== 0 ? '1px solid gainsboro' : '' }}>
+                    <div style={{ width: '100%', padding: '0.4% 0', borderBottom: i % 2 === 0 ? '1px solid gainsboro' : '' }}>
                         <Grid onClick={() => handleUserClick(item)} container spacing={1} style={{ cursor: "pointer", width: '100%', margin: 0, padding: '1%', background: 'white', display: 'flex', alignItems: 'center' }}>
                             <Grid item xs={1}>
                                 {i + 1}
                             </Grid>
                             <Grid item xs={5} style={{ display: 'flex', alignItems: 'center' }}>
-                                <h3 style={{ margin: 0, fontWeight: 500, fontSize: 16 }}>{item.firstname} {item.lastname}</h3>
+                                <h3 style={{ margin: 0, fontWeight: 500, fontSize: 14 }}>{item.firstname} {item.lastname}</h3>
                             </Grid>
                             <Grid item xs={3} style={{ display: 'flex', alignItems: 'center' }}>
-                                <h3 style={{ margin: 0, fontWeight: 500, fontSize: 16 }}>{item.email}</h3>
+                                <h3 style={{ margin: 0, fontWeight: 500, fontSize: 14 }}>{item.email}</h3>
                             </Grid>
                             <Grid item xs={2} style={{ display: 'flex', alignItems: 'center' }}>
-                                <h3 style={{ margin: 0, fontWeight: 500, fontSize: 16 }}>{item.mobileno}</h3>
+                                <h3 style={{ margin: 0, fontWeight: 500, fontSize: 14 }}>{item.mobileno}</h3>
                             </Grid>
                         </Grid>
                     </div>
@@ -69,7 +69,7 @@ export default function AllCustomers(props) {
     }
 
     return (
-        <div style={{ width: '95%', padding: '2%', background: 'white', borderRadius: 10 }}>
+        <div style={{ width: '95%', padding: '2%', background: 'white', height: '100vh' }}>
             {
                 customers.length == 0 ?
                     <>
@@ -79,8 +79,8 @@ export default function AllCustomers(props) {
                     <>
                         <Grid container spacing={1} style={{ marginBottom: '3%' }}>
                             <Grid item md={6} style={{ width: '100%' }}>
-                                <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 22 : 25 }}>All Customers</h3>
-                                <p style={{ margin: 0, opacity: '70%', marginTop: '1%' }}>View company information and account details</p>
+                                <h3 style={{ margin: 0, fontWeight: 600, fontSize: 20 }}>All Customers</h3>
+                                <p style={{ margin: 0, opacity: '70%', marginTop: '1%', fontSize: 15 }}>View customers information and account details</p>
                             </Grid>
                         </Grid>
                         {displayUsersList()}

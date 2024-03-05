@@ -82,7 +82,7 @@ export default function SignUp() {
             var body = { 'firstname': firstName, 'lastname': lastName, 'mobileno': mobileNo, 'email': email, 'password': password }
             var response = await postData('user/create-account', body)
             if (response.status === true) {
-                //localStorage.setItem('User', JSON.stringify([body]))
+                localStorage.setItem('User', JSON.stringify([body]))
                 setLoadingPage(false)
                 Swal.fire({
                     icon: 'success',
@@ -90,7 +90,7 @@ export default function SignUp() {
                     timer: 2000,
                     title: 'Your account has been created!'
                 })
-                navigate('/login', { state: { status: true } })
+                navigate('/dashboard', { state: { status: true } })
             }
             else {
                 setLoadingPage(false)

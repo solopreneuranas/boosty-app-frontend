@@ -15,6 +15,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import StartCompany from "./StartCompany";
+import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 
 export default function DashboardComponent(props) {
 
@@ -271,8 +275,46 @@ export default function DashboardComponent(props) {
 
     return (
         <div style={{ width: '100%', padding: 0 }}>
-            {statusCompany()}
-            <Support status={status} setStatus={setStatus} />
+            {
+                loadingStatus ?
+                    <>
+                        {
+                            matches_md ?
+                                <div style={{ display: "flex", justifyContent: 'center' }}><CircularProgress /></div>
+                                :
+                                <Stack spacing={1} style={{ width: '100%', marginTop: '5%' }}>
+                                    <Grid container spacing={3}>
+                                        <Grid item md={6}>
+                                            <Skeleton variant="rounded" width={'100%'} height={570} />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <div style={{ display: "flex", flexDirection: "row", gap: '3%' }}>
+                                                <Skeleton variant="rounded" width={'33%'} height={130} />
+                                                <Skeleton variant="rounded" width={'33%'} height={130} />
+                                                <Skeleton variant="rounded" width={'33%'} height={130} />
+                                            </div>
+                                            <div style={{ marginTop: '4%' }}><Skeleton variant="rounded" width={'100%'} height={200} /></div>
+                                            <div style={{ marginTop: '4%' }}><Skeleton variant="rounded" width={'100%'} height={200} /></div>
+                                        </Grid>
+                                    </Grid>
+                                </Stack>
+                        }
+                    </>
+                    :
+                    <>
+                        {
+                            companies?.length === 0 ?
+                                <>
+                                    <StartCompany title="Register your Company in U.S" subTitle=" now by simply filling some basic details!" btnText="Launch Company" icon={<RocketLaunchOutlinedIcon />} btnLink="/dashboard/register-company" />
+                                </>
+                                :
+                                <>
+                                    {statusCompany()}
+                                    <Support status={status} setStatus={setStatus} />
+                                </>
+                        }
+                    </>
+            }
         </div>
     )
 }

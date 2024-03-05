@@ -104,13 +104,13 @@ export default function AdminDashboard(props) {
                         padding: '3% 1% 3% 0',
                         color: 'black',
                         height: '100vh',
-                        background: 'white',
+                        background: '#f8f8f8',
                         position: 'sticky',
-                        //borderRight: '1px solid gainsboro',
+                        borderRight: '1px solid gainsboro',
                         top: 0
                     }}
                 >
-                    <Grid style={{ background: matches_md ? 'white' : '#F7F0FF', color: 'black', borderRadius: '10px', display: "flex", justifyContent: matches_md ? "center" : "left", alignItems: 'center', padding: '3%', marginLeft: '5%' }}>
+                    <Grid style={{ background: matches_md ? 'white' : 'white', color: 'black', borderRadius: '10px', display: "flex", justifyContent: matches_md ? "center" : "left", alignItems: 'center', padding: '3%', marginLeft: '5%' }}>
                         {
                             matches_md ?
                                 <>
@@ -136,13 +136,13 @@ export default function AdminDashboard(props) {
                                             style={{
                                                 margin: '2% 0',
                                                 color: selectedItemIndex === i ? 'white' : 'black',
-                                                borderLeft: selectedItemIndex === i ? '3px solid #7a00ff' : '3px solid white'
+                                                borderLeft: selectedItemIndex === i ? '3px solid black' : '3px solid white'
                                             }}
                                         >
-                                            <ListItemIcon style={{ color: selectedItemIndex === i ? '#7a00ff' : 'black', opacity: '100%', fontSize: '15px', opacity: selectedItemIndex === i ? '100%' : '75%' }}>
+                                            <ListItemIcon style={{ color: selectedItemIndex === i ? 'black' : 'black', opacity: '100%', fontSize: 14, opacity: selectedItemIndex === i ? '100%' : '75%' }}>
                                                 {item.icon}
                                             </ListItemIcon>
-                                            <p style={{ margin: 0, opacity: '100%', fontSize: '15px', color: selectedItemIndex === i ? '#7a00ff' : 'black' }}>{item.title}</p>
+                                            <p style={{ margin: 0, opacity: '100%', fontSize: 14, color: selectedItemIndex === i ? 'black' : 'black' }}>{item.title}</p>
                                         </ListItemButton>
                                     </div>
                                 );
@@ -151,10 +151,10 @@ export default function AdminDashboard(props) {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={10} style={{ padding: matches_md ? '2% 3%' : '2% 1.5%', height: '100%', background: '#F4F5FF', width: '100%', position: 'sticky', top: 0 }}>
+                <Grid item xs={10} style={{ padding: matches_md ? '2% 3%' : '2% 1.5%', height: '100%', background: 'white', width: '100%', position: 'sticky', top: 0 }}>
                     <Grid container spacing={1} style={{ zIndex: 99, width: '100%', padding: 0, marginBottom: matches_md ? '10%' : 0 }}>
                         <Grid item xs={matches_md ? 8 : 10} style={{ display: 'flex', alignItems: 'center' }}>
-                            <h3 style={{ fontWeight: '600', fontSize: matches_md ? 18 : 25, textAlign: 'left', margin: 0, marginLeft: '3%' }}>Hi, Welcome back {admin[0]?.name} 👋</h3>
+                            <h3 style={{ fontWeight: '600', fontSize: matches_md ? 18 : 21, textAlign: 'left', margin: 0, marginLeft: '3%' }}>Hi, Welcome back {admin[0]?.name} 👋</h3>
                         </Grid>
                         <Grid item xs={matches_md ? 2 : 2} style={{ display: "flex", alignItems: 'center' }}>
                             <Badge onClick={handleLogout} style={{ cursor: 'pointer', marginRight: matches_md ? '20%' : '10%', marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
@@ -168,7 +168,7 @@ export default function AdminDashboard(props) {
                         style={{
                             height: '100%',
                             width: '100%',
-                            marginTop: '6%'
+                            marginTop: '4%'
                         }} >
                         <Grid item xs={12} style={{
                             height: '100%', width: '100%'
