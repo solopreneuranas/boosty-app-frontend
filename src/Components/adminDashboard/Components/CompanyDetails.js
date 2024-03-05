@@ -95,7 +95,7 @@ export default function CompanyDetails(props) {
     const [loading, setLoading] = useState(false)
 
     let companyStatusObj = company?.orderStatus[0]
-  
+
     const [agentStatus, setAgentStatus] = useState(companyStatusObj?.agent)
     const [addressStatus, setAddressStatus] = useState(companyStatusObj?.address)
     const [formationStatus, setFormationStatus] = useState(companyStatusObj?.formation)
@@ -691,7 +691,7 @@ export default function CompanyDetails(props) {
 
     const userCompany = () => {
         return (
-            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
                 <Grid container spacing={0}>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={gradientText}>Edit Company Info</h3>
@@ -904,7 +904,7 @@ export default function CompanyDetails(props) {
 
     const documentCompany = () => {
         return (
-            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
                 <Grid container spacing={0}>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={gradientText}>Documents</h3>
@@ -953,7 +953,7 @@ export default function CompanyDetails(props) {
 
     const mailroomCompany = () => {
         return (
-            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
                 <Grid container spacing={0}>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={gradientText}>Mailroom</h3>
@@ -1027,7 +1027,7 @@ export default function CompanyDetails(props) {
 
     const orderStatusCompany = () => {
         return (
-            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
                 <Grid container spacing={0}>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={gradientText}>Order Status</h3>
@@ -1135,7 +1135,7 @@ export default function CompanyDetails(props) {
 
     const contactCompany = () => {
         return (
-            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
                 <Grid container spacing={0}>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={gradientText}>Contact Info</h3>
@@ -1200,7 +1200,7 @@ export default function CompanyDetails(props) {
 
     const agenctInfo = () => {
         return (
-            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
                 <Grid container spacing={0}>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={gradientText}>Agent Info</h3>
@@ -1227,7 +1227,7 @@ export default function CompanyDetails(props) {
 
     const memberCompany = () => {
         return (
-            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
                 <Grid container spacing={0}>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={gradientText}>Members Info</h3>

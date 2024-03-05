@@ -303,7 +303,7 @@ export default function DashboardComponent(props) {
                     :
                     <>
                         {
-                            companies?.length === 0 ?
+                            companies.length === 0 ?
                                 <>
                                     <StartCompany title="Register your Company in U.S" subTitle=" now by simply filling some basic details!" btnText="Launch Company" icon={<RocketLaunchOutlinedIcon />} btnLink="/dashboard/register-company" />
                                 </>

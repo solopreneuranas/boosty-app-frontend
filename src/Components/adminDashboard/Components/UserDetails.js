@@ -108,7 +108,7 @@ export default function UserDetails(props) {
 
     const userCompany = () => {
         return (
-            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+            <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
                 <Grid container spacing={0}>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={gradientText}>Edit User Info</h3>
