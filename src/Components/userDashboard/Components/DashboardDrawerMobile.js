@@ -5,10 +5,17 @@ import SideDrawer from './SideDrawer';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 export default function DashboardDrawerMobile(props) {
 
+    const navigate = useNavigate()
     const [state, setState] = React.useState({ right: false })
+    const theme = useTheme();
+    const matches_md = useMediaQuery(theme.breakpoints.down('md'));
+    const matches_sm = useMediaQuery(theme.breakpoints.down('sm'));
     var user = JSON.parse(localStorage.getItem("User"))
     const [userId, setUserId] = useState(user[0]?._id)
     const [firstName, setFirstName] = useState(user[0]?.firstname)
@@ -38,7 +45,6 @@ export default function DashboardDrawerMobile(props) {
             <SideDrawer firstName={user[0].firstname} lastName={user[0].lastname} mobileNo={user[0].mobileno} email={user[0].email} password={user[0].password} userId={userId} />
         </Box>
     );
-
 
     return (
         <div>

@@ -679,6 +679,19 @@ export default function CompanyDetails(props) {
         setCompanyIndustry(newValue)
     }
 
+    const handleCompanyState = (event, newValue) => {
+        setSelectedState(newValue)
+    }
+    console.log('companyState', selectedState);
+
+    const handleCompanyStatusChange = (event) => {
+        setCompanyStatus(event.target.value)
+    }
+
+    const handleIsItin = (event) => {
+        setIsItin(event.target.value)
+    }
+
     const userCompany = () => {
         return (
             <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
@@ -722,7 +735,19 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Company Status</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label="Status" onChange={(e) => setCompanyStatus(e.target.value)} className={classes.roundedTextField} value={companyStatus} variant="outlined" />
+                        {/* <TextField label="Status" onChange={(e) => setCompanyStatus(e.target.value)} className={classes.roundedTextField} value={companyStatus} variant="outlined" /> */}
+                        <FormControl className={classes.roundedTextField} style={{ width: 150 }}>
+                            <InputLabel>Status</InputLabel>
+                            <Select
+                                value={companyStatus}
+                                label="Company Status"
+                                onChange={handleCompanyStatusChange}
+                            >
+                                <MenuItem value={'Pending'}>Pending</MenuItem>
+                                <MenuItem value={'In Progress'}>In Progress</MenuItem>
+                                <MenuItem value={'Completed'}>Completed</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Grid>
                 </Grid>
 
@@ -733,7 +758,7 @@ export default function CompanyDetails(props) {
                     <Grid item sm={9} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Company Industry</h3>
                     </Grid>
-                    <Grid item sm={3} style={{}}>
+                    <Grid item sm={3}>
                         <Autocomplete
                             value={companyIndustry}
                             disablePortal
@@ -753,7 +778,15 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Formation State</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label="State" className={classes.roundedTextField} value={selectedState} variant="outlined" />
+                        {/* <TextField label="State" className={classes.roundedTextField} value={selectedState} variant="outlined" /> */}
+                        <Autocomplete style={{ width: 340 }}
+                            value={selectedState}
+                            disablePortal
+                            options={countries}
+                            onChange={handleCompanyState}
+                            getOptionLabel={(option) => option}
+                            renderInput={(params) => <TextField variant='outlined' className={classes.roundedTextField} {...params} label="Select State" />}
+                        />
                     </Grid>
                 </Grid>
 
@@ -823,9 +856,22 @@ export default function CompanyDetails(props) {
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>ITIN</h3>
                     </Grid>
-                    <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
+                    {/* <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
                         <TextField label="true/false" onChange={(e) => setIsItin(e.target.value)} className={classes.roundedTextField} value={isItin} variant="outlined" />
-                        <TextField label="ITIN" onChange={(e) => setItin(e.target.value)} className={classes.roundedTextField} value={itin} variant="outlined" />
+                    </Grid> */}
+                    <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
+                        <FormControl className={classes.roundedTextField} style={{ width: 150 }}>
+                            <InputLabel>Is ITIN</InputLabel>
+                            <Select
+                                value={isItin}
+                                label="Is ITIN"
+                                onChange={handleIsItin}
+                            >
+                                <MenuItem value={'true'}>True</MenuItem>
+                                <MenuItem value={'false'}>False</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <TextField label="ITIN" onChange={(e) => setItin(e.target.value)} className={classes.roundedTextField} value={itin} variant="outlined" style={{ marginLeft: '2%' }} />
                     </Grid>
                 </Grid>
 

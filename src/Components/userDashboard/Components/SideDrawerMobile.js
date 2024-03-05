@@ -20,6 +20,7 @@ import { useTheme } from '@mui/material/styles';
 import Support from './Support';
 import MarkunreadOutlinedIcon from '@mui/icons-material/MarkunreadOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import Logout from '@mui/icons-material/Logout';
 
 export default function SideDrawerMobile(props) {
 
@@ -96,6 +97,20 @@ export default function SideDrawerMobile(props) {
         }
     }
 
+    const handleLogout = () => {
+        localStorage.clear()
+        navigate('/login')
+    }
+
+    const logoutSec = () => {
+        return (
+            <div onClick={handleLogout} style={{ cursor: 'pointer', marginLeft: '6%', display: 'flex', alignItems: 'center', marginTop: '5%' }}>
+                <Logout color="action" style={{ width: 25, height: 25, color: '#fc7168' }} />
+                <h3 style={{ fontWeight: 500, fontSize: 17, marginLeft: '3%', color: '#fc7168' }}>Logout</h3>
+            </div>
+        )
+    }
+
     const listComponent = () => {
         return (
             <div style={{ marginTop: '10%' }}>
@@ -137,6 +152,7 @@ export default function SideDrawerMobile(props) {
         >
             <CloseIcon onClick={toggleDrawer('right', false)} style={{ position: 'absolute', right: '2%', top: '1%', cursor: 'pointer', opacity: '70%', zIndex: 99 }} />
             {listComponent()}
+            {logoutSec()}
         </Box>
     );
 

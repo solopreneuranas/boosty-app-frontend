@@ -128,7 +128,7 @@ export default function SignIn() {
     }
 
     return (
-        <div className='root' style={{ height: '100%' }}>
+        <div className='root' style={{ height: '100%', background:  'white' }}>
             {
                 loadingPage ?
                     <>
@@ -229,12 +229,12 @@ export default function SignIn() {
                                         </FormControl>
                                         <p style={{ color: '#FF0000', fontSize: '12.3px', marginLeft: '15px', marginTop: '0' }}>{getErrors.password}</p>
                                     </Grid>
-                                    <Grid item md={12} style={{ padding: 0, marginTop: '3%', width: '100%' }}>
+                                    {/* <Grid item md={12} style={{ padding: 0, marginTop: '3%', width: '100%' }}>
                                         <div>
                                             <Checkbox {...label} defaultChecked style={{ paddingLeft: 0 }} />
                                             <font style={{ fontSize: '15px', opacity: '80%' }}>I accept the <font style={{ color: '#2c2c2c' }}>terms and conditions.</font></font>
                                         </div>
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item md={12} variant='contained' style={{ width: '100%', padding: 0, marginTop: '4%' }}>
                                         <Button
                                             onClick={handleLoginAccount}

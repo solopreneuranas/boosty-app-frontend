@@ -143,7 +143,9 @@ export default function Cart(props) {
     const finalCost = cartServicesCost - (cartServicesCost * discountPercentage / 100);
 
     useEffect(() => {
-        props.setOrderAmount(finalCost)
+        if (props.setOrderAmount) {
+            props.setOrderAmount(finalCost)
+        }
     }, [finalCost])
 
     const options = {
