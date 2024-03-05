@@ -17,6 +17,9 @@ export default function AllCompanies(props) {
     const matches_md = useMediaQuery(theme.breakpoints.down('md'));
     const matches_sm = useMediaQuery(theme.breakpoints.down('sm'));
 
+    let userData = JSON.parse(localStorage.getItem('User'))
+    console.log('userData: ', userData);
+
     const fetchCompanies = async () => {
         var response = await getData('company/display_all_companies')
         if (response.status === true) {
@@ -37,8 +40,21 @@ export default function AllCompanies(props) {
         "September", "October", "November", "December"
     ]
 
+    const [orderStatus, setOrderStatus] = useState({})
+    const fetchOrderStatus = async () => {
+        var body = { 'userid': userData[0]._id }
+        var response = await postData('orderstatus/display_order_status_by_user', body)
+        if (response.status === true) {
+            setOrderStatus(response.data[0])
+        }
+    }
+
+    useEffect(() => {
+        fetchOrderStatus()
+    }, [])
+
     const handleCompanyClick = (item) => {
-        navigate('/admindashboard/company-details', { state: { company: item } })
+        navigate('/admindashboard/company-details', { state: { company: item, orderStatus: orderStatus } })
         window.scrollTo(0, 0)
     }
 

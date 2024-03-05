@@ -23,6 +23,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Autocomplete from '@mui/material/Autocomplete';
+import Switch from '@mui/material/Switch';
 
 const useStyles = makeStyles((theme) => ({
     roundedTextField: {
@@ -38,6 +39,10 @@ export default function CompanyDetails(props) {
     const classes = useStyles();
     var location = useLocation()
     var company = location?.state?.company
+    let orderStatus = location?.state?.orderStatus
+
+    const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
     var admin = JSON.parse(localStorage.getItem("Admin"))
     const theme = useTheme();
     const matches_sm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -88,14 +93,15 @@ export default function CompanyDetails(props) {
     const [memberLastName, setMemberLastName] = useState(company.memberlastname)
     const [memberOwnership, setMemberOwnership] = useState(company.memberownership)
 
-    const [orderStatus, setOrderStatus] = useState({})
-    const [agentStatus, setAgentStatus] = useState('')
-    const [addressStatus, setAddressStatus] = useState('')
-    const [formationStatus, setFormationStatus] = useState('')
-    const [einStatus, setEinStatus] = useState('')
-    const [boiStatus, setBoiStatus] = useState('')
-    const [agreementStatus, setAgreementStatus] = useState('')
-    const [bankStatus, setBankStatus] = useState('')
+    // const [orderStatus, setOrderStatus] = useState({})
+    console.log('orderStatus: ', orderStatus);
+    const [agentStatus, setAgentStatus] = useState(orderStatus?.agent)
+    const [addressStatus, setAddressStatus] = useState(orderStatus?.address)
+    const [formationStatus, setFormationStatus] = useState(orderStatus?.formation)
+    const [einStatus, setEinStatus] = useState(orderStatus?.ein)
+    const [boiStatus, setBoiStatus] = useState(orderStatus?.boi)
+    const [agreementStatus, setAgreementStatus] = useState(orderStatus?.agreement)
+    const [bankStatus, setBankStatus] = useState(orderStatus?.bank)
 
     const [loading, setLoading] = useState(false)
 
@@ -240,13 +246,13 @@ export default function CompanyDetails(props) {
         }
     }
 
-    const fetchOrderStatus = async () => {
-        var body = { 'userid': company.userid }
-        var response = await postData('orderstatus/display_order_status_by_user', body)
-        if (response.status === true) {
-            setOrderStatus(response.data[0])
-        }
-    }
+    // const fetchOrderStatus = async () => {
+    //     var body = { 'userid': company.userid }
+    //     var response = await postData('orderstatus/display_order_status_by_user', body)
+    //     if (response.status === true) {
+    //         setOrderStatus(response.data[0])
+    //     }
+    // }
 
     const fetchMailsByUser = async () => {
         var body = { 'userid': company.userid }
@@ -268,7 +274,7 @@ export default function CompanyDetails(props) {
         fetchDocumentsByUser()
         fetchMailsByUser()
         fetchUserDetailsByCompany()
-        fetchOrderStatus()
+        // fetchOrderStatus()
     }, [])
 
     const months = [
@@ -329,13 +335,13 @@ export default function CompanyDetails(props) {
         var body = {
             '_id': orderStatus._id,
             'userid': company.userid,
-            'agent': agentStatus.length === 0 ? orderStatus?.agentStatus : agentStatus,
-            'address': addressStatus.length === 0 ? orderStatus?.addressStatus : addressStatus,
-            'formation': formationStatus.length === 0 ? orderStatus?.formationStatus : formationStatus,
-            'ein': einStatus.length === 0 ? orderStatus?.einStatus : einStatus,
-            'boi': boiStatus.length === 0 ? orderStatus?.boiStatus : boiStatus,
-            'agreement': agreementStatus.length === 0 ? orderStatus?.agreementStatus : agreementStatus,
-            'bank': bankStatus.length === 0 ? orderStatus?.bankStatus : bankStatus
+            'agent': agentStatus,
+            'address': addressStatus,
+            'formation': formationStatus,
+            'ein': einStatus,
+            'boi': boiStatus,
+            'agreement': agreementStatus,
+            'bank': bankStatus,
         }
         var response = await postData('orderstatus/update-order-status', body)
         if (response.status === true) {
@@ -1004,6 +1010,31 @@ export default function CompanyDetails(props) {
         )
     }
 
+    const handleSwitch = (e, type) => {
+        if (type === 'agent') {
+            setAgentStatus(agentStatus === 'True' ? 'False' : 'True')
+        }
+        if (type === 'address') {
+            setAddressStatus(addressStatus === 'True' ? 'False' : 'True')
+        }
+        if (type === 'formation') {
+            setFormationStatus(formationStatus === 'True' ? 'False' : 'True')
+        }
+        if (type === 'ein') {
+            setEinStatus(einStatus === 'True' ? 'False' : 'True')
+        }
+        if (type === 'boi') {
+            setBoiStatus(boiStatus === 'True' ? 'False' : 'True')
+        }
+        if (type === 'agreement') {
+            setAgreementStatus(agreementStatus === 'True' ? 'False' : 'True')
+        }
+        if (type === 'bank') {
+            setBankStatus(bankStatus === 'True' ? 'False' : 'True')
+        }
+    }
+    console.log('agentNew', agentStatus);
+
     const orderStatusCompany = () => {
         return (
             <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
@@ -1023,7 +1054,8 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Registered Agent Assigned</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label={orderStatus?.agent} onChange={(e) => setAgentStatus(e.target.value)} className={classes.roundedTextField} value={agentStatus} variant="outlined" />
+                        {/* <TextField label={orderStatus?.agent} onChange={(e) => setAgentStatus(e.target.value)} className={classes.roundedTextField} value={agentStatus} variant="outlined" /> */}
+                        <Switch {...label} defaultChecked={agentStatus === 'True' ? true : false} onChange={(e) => handleSwitch(e, 'agent')} />
                     </Grid>
                 </Grid>
 
@@ -1034,7 +1066,8 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Business Mailing Address Issued</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label={orderStatus?.address} onChange={(e) => setAddressStatus(e.target.value)} className={classes.roundedTextField} value={addressStatus} variant="outlined" />
+                        {/* <TextField label={orderStatus?.address} onChange={(e) => setAddressStatus(e.target.value)} className={classes.roundedTextField} value={addressStatus} variant="outlined" /> */}
+                        <Switch {...label} defaultChecked={addressStatus === 'True' ? true : false} onChange={(e) => handleSwitch(e, 'address')} />
                     </Grid>
                 </Grid>
 
@@ -1045,7 +1078,8 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Company Formation Completed</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label={orderStatus?.formation} onChange={(e) => setFormationStatus(e.target.value)} className={classes.roundedTextField} value={formationStatus} variant="outlined" />
+                        {/* <TextField label={orderStatus?.formation} onChange={(e) => setFormationStatus(e.target.value)} className={classes.roundedTextField} value={formationStatus} variant="outlined" /> */}
+                        <Switch {...label} defaultChecked={formationStatus === 'True' ? true : false} onChange={(e) => handleSwitch(e, 'formation')} />
                     </Grid>
                 </Grid>
 
@@ -1056,7 +1090,8 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>EIN Successfully Processed</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label={orderStatus?.ein} onChange={(e) => setEinStatus(e.target.value)} className={classes.roundedTextField} value={einStatus} variant="outlined" />
+                        {/* <TextField label={orderStatus?.ein} onChange={(e) => setEinStatus(e.target.value)} className={classes.roundedTextField} value={einStatus} variant="outlined" /> */}
+                        <Switch {...label} defaultChecked={einStatus === 'True' ? true : false} onChange={(e) => handleSwitch(e, 'ein')} />
                     </Grid>
                 </Grid>
 
@@ -1067,7 +1102,8 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>BOI Report Filed</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label={orderStatus?.boi} onChange={(e) => setBoiStatus(e.target.value)} className={classes.roundedTextField} value={boiStatus} variant="outlined" />
+                        {/* <TextField label={orderStatus?.boi} onChange={(e) => setBoiStatus(e.target.value)} className={classes.roundedTextField} value={boiStatus} variant="outlined" /> */}
+                        <Switch {...label} defaultChecked={boiStatus === 'True' ? true : false} onChange={(e) => handleSwitch(e, 'boi')} />
                     </Grid>
                 </Grid>
 
@@ -1078,7 +1114,8 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Operating Agreement Prepared</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label={orderStatus?.agreement} onChange={(e) => setAgreementStatus(e.target.value)} className={classes.roundedTextField} value={agreementStatus} variant="outlined" />
+                        {/* <TextField label={orderStatus?.agreement} onChange={(e) => setAgreementStatus(e.target.value)} className={classes.roundedTextField} value={agreementStatus} variant="outlined" /> */}
+                        <Switch {...label} defaultChecked={agreementStatus === 'True' ? true : false} onChange={(e) => handleSwitch(e, 'agreement')} />
                     </Grid>
                 </Grid>
 
@@ -1090,7 +1127,8 @@ export default function CompanyDetails(props) {
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Business Bank Account Set Up</h3>
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
-                        <TextField label={orderStatus?.bank} onChange={(e) => setBankStatus(e.target.value)} className={classes.roundedTextField} value={bankStatus} variant="outlined" />
+                        {/* <TextField label={orderStatus?.bank} onChange={(e) => setBankStatus(e.target.value)} className={classes.roundedTextField} value={bankStatus} variant="outlined" /> */}
+                        <Switch {...label} defaultChecked={bankStatus === 'True' ? true : false} onChange={(e) => handleSwitch(e, 'bank')} />
                     </Grid>
                 </Grid>
 
@@ -1126,22 +1164,22 @@ export default function CompanyDetails(props) {
                     </Grid>
                     <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
                         <TextField label="First name" onChange={(e) => setLegalFirstName(e.target.value)} className={classes.roundedTextField} value={legalFirstName} variant="outlined" />
-                        <TextField label="Last name" onChange={(e) => setLegalLastName(e.target.value)} className={classes.roundedTextField} value={legalLastName} variant="outlined" />
+                        <TextField label="Last name" onChange={(e) => setLegalLastName(e.target.value)} className={classes.roundedTextField} value={legalLastName} variant="outlined" style={{ marginLeft: '2%' }} />
                     </Grid>
                 </Grid>
 
                 <hr style={{ opacity: '30%' }} />
 
                 <Grid container spacing={2} style={{ padding: '2% 0' }}>
-                    <Grid item sm={4} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
+                    <Grid item sm={3} style={{ width: '50%', display: 'flex', justifyContent: 'left' }}>
                         <h3 style={{ margin: matches_md ? '16% 0' : '5% 0', fontWeight: 500, textTransform: "uppercase", opacity: '70%', fontSize: matches_md ? 14 : 15 }}>Mailing Address</h3>
                     </Grid>
-                    <Grid item sm={8} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
+                    <Grid item sm={9} style={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', alignItems: "center" }}>
                         <TextField label="Address" fullWidth onChange={(e) => setAddress(e.target.value)} className={classes.roundedTextField} value={address} variant="outlined" />
-                        <TextField label="Zipcode" onChange={(e) => setZipCode(e.target.value)} className={classes.roundedTextField} value={zipCode} variant="outlined" />
-                        <TextField label="City" onChange={(e) => setCity(e.target.value)} className={classes.roundedTextField} value={city} variant="outlined" />
-                        <TextField label="State" onChange={(e) => setState(e.target.value)} className={classes.roundedTextField} value={state} variant="outlined" />
-                        <TextField label="Country" onChange={(e) => setCountry(e.target.value)} className={classes.roundedTextField} value={country} variant="outlined" />
+                        <TextField label="Zipcode" onChange={(e) => setZipCode(e.target.value)} className={classes.roundedTextField} value={zipCode} variant="outlined" style={{ marginLeft: '1%' }} />
+                        <TextField label="City" onChange={(e) => setCity(e.target.value)} className={classes.roundedTextField} value={city} variant="outlined" style={{ marginLeft: '1%' }} />
+                        <TextField label="State" onChange={(e) => setState(e.target.value)} className={classes.roundedTextField} value={state} variant="outlined" style={{ marginLeft: '1%' }} />
+                        <TextField label="Country" onChange={(e) => setCountry(e.target.value)} className={classes.roundedTextField} value={country} variant="outlined" style={{ marginLeft: '1%' }} />
                     </Grid>
                 </Grid>
 
@@ -1223,7 +1261,7 @@ export default function CompanyDetails(props) {
                             </Grid>
                             <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', alignItems: "center" }}>
                                 <p style={{ fontSize: 15, margin: '5% 0' }}>Ownership: </p>
-                                <TextField label="Ownership" onChange={(e) => setMemberOwnership(e.target.value)} className={classes.roundedTextField} value={memberOwnership} variant="outlined" />
+                                <TextField label="Ownership" onChange={(e) => setMemberOwnership(e.target.value)} className={classes.roundedTextField} value={memberOwnership} variant="outlined" style={{ marginLeft: '2%' }} />
                             </Grid>
                         </Grid>
                     </div>
@@ -1242,11 +1280,11 @@ export default function CompanyDetails(props) {
                             <div style={{ background: 'linear-gradient(to right, blue, #8000ff)', color: 'white', borderRadius: '100%', width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: "center" }}>
                                 {i + 2}
                             </div>
-                            <TextField className={classes.roundedTextField} value={`${item.firstname} ${item.lastname}`} variant="outlined" />
+                            <TextField label="Full name" className={classes.roundedTextField} value={`${item.firstname} ${item.lastname}`} variant="outlined" />
                         </Grid>
                         <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', alignItems: "center" }}>
                             <p style={{ fontSize: 15, margin: '5% 0' }}>Ownership: </p>
-                            <TextField className={classes.roundedTextField} value={item.ownership} variant="outlined" />
+                            <TextField label="Ownership" className={classes.roundedTextField} value={item.ownership} variant="outlined" style={{ marginLeft: '2%' }} />
                         </Grid>
                     </Grid>
                 </div>
