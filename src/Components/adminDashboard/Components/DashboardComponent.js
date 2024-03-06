@@ -19,6 +19,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import AdminChart from "./AdminChart";
 
 export default function DashboardComponent(props) {
 
@@ -189,6 +190,9 @@ export default function DashboardComponent(props) {
                                     {dashboardItemsComponent()}
                                 </Grid>
                             </Grid>
+                            <div style={{ width: '70%' }}>
+                                <AdminChart />
+                            </div>
                         </div>
                     </>
             }

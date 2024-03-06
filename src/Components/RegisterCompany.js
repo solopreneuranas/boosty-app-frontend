@@ -86,6 +86,8 @@ export default function RegisterCompany(props) {
     const [orderAmount, setOrderAmount] = useState('')
     const [selectedState, setSelectedState] = useState(null)
 
+    const [addonsAmount, setAddonsAmount] = useState(null)
+
     const [getErrors, setErrors] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
@@ -445,6 +447,9 @@ export default function RegisterCompany(props) {
                 formData.append('paymentid', response.razorpay_payment_id)
                 formData.append('companystatus', 'Pending')
                 formData.append('orderamount', orderAmount)
+                formData.append('addonsAmount', addonsAmount)
+                formData.append('companyAmount', orderAmount - addonsAmount)
+                formData.append('selectedStateFee', selectedState?.fee)
                 formData.append('orderdate', new Date())
                 formData.append('membersdata', JSON.stringify(memberData))
                 formData.append('addons', JSON.stringify(addons))
@@ -901,6 +906,8 @@ export default function RegisterCompany(props) {
                                 orderAmount={orderAmount}
                                 setOrderAmount={setOrderAmount}
                                 addons={addons}
+                                addonsAmount={addonsAmount}
+                                setAddonsAmount={setAddonsAmount}
                             />
                             <Grid container spacing={0} style={{ marginTop: '5%' }}>
                                 <Grid item md={12}>

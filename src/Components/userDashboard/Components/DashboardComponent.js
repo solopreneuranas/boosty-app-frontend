@@ -20,6 +20,7 @@ import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import { primaryColor } from "../../globalVariables";
+import AdminChart from "../../adminDashboard/Components/AdminChart";
 
 export default function DashboardComponent(props) {
 
