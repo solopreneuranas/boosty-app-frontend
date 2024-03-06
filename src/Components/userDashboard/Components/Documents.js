@@ -44,26 +44,6 @@ export default function Documents(props) {
         fetchDocumentsByCompany()
     }, [])
 
-
-    const documentsArray = [
-        {
-            title: "ITIN",
-            format: "PDF"
-        },
-        {
-            title: "EIN",
-            format: "PDF"
-        },
-        {
-            title: "Operating Agreement",
-            format: "PDF"
-        },
-        {
-            title: "TAX",
-            format: "PDF"
-        },
-    ]
-
     const handleDownloadFile = async (filename) => {
         const fileUrl = `${serverURL}/images/${filename}`
         const response = await fetch(fileUrl)
@@ -87,12 +67,12 @@ export default function Documents(props) {
                         documents.map((item, i) => {
                             var docFormat = item.documents.split('.').pop().toUpperCase()
                             return (
-                                <div style={{ width: matches_md ? '100%' : 200, height: 70, borderRadius: 10, background: 'white', padding: matches_md ? '6%' : '3%', position: "relative", marginTop: matches_md ? '4%' : '2%' }}>
-                                    <div onClick={() => handleDownloadFile(item.documents)} style={{ position: "absolute", padding: '1% 2%', borderRadius: 5, top: '10%', right: '6%', background: '#91edff', color: '#0293b0', width: 80, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%', cursor: "pointer" }}>
-                                        <GetAppOutlinedIcon style={{ color: '#0293b0' }} />
+                                <div style={{ width: matches_md ? '100%' : 200, height: 70, borderRadius: '10px 10px 0 0', background: 'white', padding: matches_md ? '6%' : '4% 2%', position: "relative", marginTop: matches_md ? '4%' : '2%', borderBottom: '5px solid #7A00FF', boxShadow: '3px 3px 20px #ededed', }}>
+                                    <div onClick={() => handleDownloadFile(item.documents)} style={{ position: "absolute", padding: '1% 2%', borderRadius: 5, top: '10%', right: '6%', background: '#F4F5FF', color: '#7A00FF', width: 80, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%', cursor: "pointer" }}>
+                                        <GetAppOutlinedIcon style={{ color: '#7A00FF' }} />
                                         {docFormat}
                                     </div>
-                                    <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 19 : 22, width: '70%' }}>{item.name}</h3>
+                                    <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 19 : 17, width: '50%' }}>{item.name}</h3>
                                 </div>
                             )
                         })
@@ -117,8 +97,8 @@ export default function Documents(props) {
                     <>
                         <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: '2%', marginTop: '5%' }}>
                             <Skeleton variant="rounded" width={matches_md ? '100%' : '30%'} height={150} style={{ marginTop: matches_md ? '3%' : 0 }} />
-                            <Skeleton variant="rounded" width={matches_md ? '100%' : '30%'} height={150} style={{ marginTop: matches_md ? '3%' : 0 }}/>
-                            <Skeleton variant="rounded" width={matches_md ? '100%' : '30%'} height={150} style={{ marginTop: matches_md ? '3%' : 0 }}/>
+                            <Skeleton variant="rounded" width={matches_md ? '100%' : '30%'} height={150} style={{ marginTop: matches_md ? '3%' : 0 }} />
+                            <Skeleton variant="rounded" width={matches_md ? '100%' : '30%'} height={150} style={{ marginTop: matches_md ? '3%' : 0 }} />
                         </div>
                     </>
                     :

@@ -78,7 +78,7 @@ export default function CompanyDetails(props) {
     const companyInfo = [
         {
             title: 'Company Address',
-            para: `${company.address}-${company.zipcode}, ${company.city}, ${company.state}, ${company.country}`
+            para:  company.agentaddress
         },
         {
             title: 'Company Status',

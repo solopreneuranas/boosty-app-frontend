@@ -67,7 +67,7 @@ export default function Mailroom(props) {
             var formattedDate = `${day} ${months[month].slice(0, 3)} ${year}`
             return (
                 <div style={{ marginBottom: matches_md ? '10%' : 0 }}>
-                    <Grid item md={5} style={{ borderRadius: 10, padding: matches_md ? '6%' : '3%', display: "flex", justifyContent: "left", flexDirection: "column", background: 'white', marginTop: '3%' }}>
+                    <Grid item md={5} style={{ borderRadius: 10, padding: matches_md ? '6%' : '3%', display: "flex", justifyContent: "left", flexDirection: "column", background: 'white', marginTop: '3%', boxShadow: '3px 3px 20px #ededed' }}>
                         <PermIdentityOutlinedIcon style={{ opacity: '70%', width: 50, height: 50, color: '#7A00FF' }} />
                         <h3 style={{ fontWeight: 550, fontSize: 20, marginBottom: '6%' }}>Registered Agent</h3>
                         <p style={{ opacity: '70%', margin: '1% 0' }}>Active until {formattedDate}</p>

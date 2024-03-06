@@ -56,7 +56,13 @@ export default function CompanyDetails(props) {
 
     const [docTitle, setDocTitle] = useState('')
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    // const handleClose = () => setOpen(false);
+
+    const handleClose = () => {
+        setOpen(false)
+        setDocTitle('')
+        setDoc({ bytes: '', filename: '' })
+    }
 
     const [mailBtnStatus, setMailBtnStatus] = useState(false)
     const [mailSender, setMailSender] = useState('')
@@ -64,7 +70,13 @@ export default function CompanyDetails(props) {
     const [mail, setMail] = useState({ bytes: '', filename: '' })
     const handleOpenMail = () => setOpenMail(true);
     const [mails, setMails] = useState([])
-    const handleCloseMail = () => setOpenMail(false);
+
+    const handleCloseMail = () => {
+        setOpenMail(false)
+        setMailSender('')
+        setMailType('')
+        setMail({ bytes: '', filename: '' })
+    };
 
     const [userData, setUserData] = useState([])
     const [companyStatus, setCompanyStatus] = useState(company.companystatus)
@@ -405,6 +417,8 @@ export default function CompanyDetails(props) {
                 title: 'Uploaded successful!',
                 timer: 2000
             })
+            setDocTitle('')
+            setDoc({ bytes: '', filename: '' })
         }
         else {
             alert('failed')
@@ -921,15 +935,15 @@ export default function CompanyDetails(props) {
                         documents.map((item, i) => {
                             var docFormat = item.documents.split('.').pop().toUpperCase()
                             return (
-                                <div style={{ width: matches_md ? '100%' : 200, height: 50, borderRadius: 10, background: '#F7F0FF', padding: matches_md ? '6%' : '3%', position: "relative", marginTop: matches_md ? '4%' : '2%' }}>
+                                <div style={{ width: matches_md ? '100%' : 200, height: 50, borderRadius: 10, background: '#f8f8f8', padding: matches_md ? '6%' : '4% 2%', position: "relative", marginTop: matches_md ? '4%' : '2%', border: '2px solid gainsboro' }}>
                                     <div onClick={() => handleDeleteDoc(item)} style={{ position: "absolute", padding: '1% 2%', bottom: '10%', right: '6%', cursor: "pointer" }}>
-                                        <DeleteOutlineOutlinedIcon style={{ color: '#0293b0', width: 30, height: 30 }} />
+                                        <DeleteOutlineOutlinedIcon style={{ color: 'black', width: 30, height: 30 }} />
                                     </div>
                                     <div onClick={() => handleDownloadDoc(item.documents)} style={{ position: "absolute", padding: '1% 2%', borderRadius: 5, top: '10%', right: '6%', background: '#91edff', color: '#0293b0', width: 80, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%', cursor: "pointer" }}>
                                         <GetAppOutlinedIcon style={{ color: '#0293b0' }} />
                                         {docFormat}
                                     </div>
-                                    <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 22 : 25, width: matches_md ? '70%' : '100%' }}>{item.name}</h3>
+                                    <h3 style={{ margin: 0, fontWeight: 600, fontSize: 17, width: '50%' }}>{item.name}</h3>
                                 </div>
                             )
                         })
@@ -970,16 +984,16 @@ export default function CompanyDetails(props) {
                         mails.map((item, i) => {
                             var mailFormat = item.mail.split('.').pop().toUpperCase()
                             return (
-                                <div style={{ width: matches_md ? '100%' : 200, height: 50, borderRadius: 10, background: '#F7F0FF', padding: matches_md ? '6%' : '3%', position: "relative", marginTop: matches_md ? '4%' : '2%' }}>
+                                <div style={{ width: matches_md ? '100%' : 200, height: 50, borderRadius: 10, background: '#f8f8f8', padding: matches_md ? '6%' : '4% 2%', position: "relative", marginTop: matches_md ? '4%' : '2%', border: '2px solid gainsboro' }}>
                                     <div onClick={() => handleDeleteMail(item)} style={{ position: "absolute", padding: '1% 2%', bottom: '10%', right: '6%', cursor: "pointer" }}>
-                                        <DeleteOutlineOutlinedIcon style={{ color: '#0293b0', width: 30, height: 30 }} />
+                                        <DeleteOutlineOutlinedIcon style={{ color: 'black', width: 30, height: 30 }} />
                                     </div>
                                     <div onClick={() => handleDownloadMail(item.mail)} style={{ position: "absolute", padding: '1% 2%', borderRadius: 5, top: '10%', right: '6%', background: '#91edff', color: '#0293b0', width: 80, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%', cursor: "pointer" }}>
                                         <GetAppOutlinedIcon style={{ color: '#0293b0' }} />
                                         {mailFormat}
                                     </div>
-                                    <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 22 : 25, width: matches_md ? '70%' : '100%' }}>{item.sender}</h3>
-                                    <p style={{ opacity: '60%' }}>{item.mailtype}</p>
+                                    <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 19 : 17, width: '50%' }}>{item.sender}</h3>
+                                    <p style={{ opacity: '60%', fontSize: 14 }}>{item.mailtype}</p>
                                 </div>
                             )
                         })
