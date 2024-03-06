@@ -16,6 +16,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import { primaryColor } from '../../globalVariables';
 
 const useStyles = makeStyles((theme) => ({
     roundedTextField: {
@@ -83,7 +84,7 @@ export default function SideDrawer(props) {
                         <center>
                             <img className='profileImg' src='/images/user-image.png' style={{ width: 100, height: 100, borderRadius: '50%', cursor: 'pointer' }} />
                             <h2 style={{ margin: 0, fontWeight: 600, fontSize: 20 }}>{props.firstName}</h2>
-                            <p style={{ padding: 0, fontWeight: 600, color: '#7a00ff', fontSize: 14 }}>{props.email}</p>
+                            <p style={{ padding: 0, fontWeight: 600, color: primaryColor, fontSize: 14 }}>{props.email}</p>
                             <div style={{ marginTop: '10%', width: '100%' }}>
                                 {editUser()}
                             </div>

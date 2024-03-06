@@ -20,6 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useNavigate } from 'react-router-dom';
+import { primaryColor } from '../../globalVariables';
 
 const useStyles = makeStyles((theme) => ({
     roundedTextField: {
@@ -183,8 +184,8 @@ export default function Addons() {
                                 <Button onClick={() => handleCart(item)} startIcon={<ShoppingCartOutlinedIcon />} variant='outined'
                                     style={{
                                         marginTop: '5%',
-                                        color: keys.includes(item.key + "") ? 'gray' : '#7A00FF',
-                                        border: keys.includes(item.key + "") ? '2px solid gray' : '2px solid #7A00FF',
+                                        color: keys.includes(item.key + "") ? 'gray' : primaryColor,
+                                        border: keys.includes(item.key + "") ? '2px solid gray' : `2px solid ${primaryColor}`,
                                         borderRadius: 10,
                                         padding: '2% 5%',
                                         fontWeight: 500

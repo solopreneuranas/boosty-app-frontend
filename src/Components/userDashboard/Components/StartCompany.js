@@ -9,6 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { primaryColor } from "../../globalVariables";
 
 export default function StartCompany(props) {
 
@@ -30,7 +31,7 @@ export default function StartCompany(props) {
     const startCompany = () => {
         return (
             <div>
-                <Grid container spacing={1} style={{ position: "relative", borderRadius: 20, background: matches_md ? 'white' : 'linear-gradient(to right bottom, white 70%, blue 28%, #8000ff 2%)', padding: matches_md ? '6%' : '3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
+                <Grid container spacing={1} style={{ position: "relative", borderRadius: 20, background: matches_md ? 'white' : `linear-gradient(to right bottom, white 70%, blue 28%, ${primaryColor} 2%)`, padding: matches_md ? '6%' : '3% 5%', boxShadow: '3px 3px 20px #ededed' }}>
                     <Grid item md={12} style={{ display: "flex", alignItems: "center", gap: '1%', marginBottom: '2%' }}>
                         <CheckCircleOutlinedIcon style={{ opacity: '50%', marginRight: matches_md ? '3%' : '' }} />
                         <p style={{ margin: 0, fontSize: 18, fontWeight: 500, opacity: '50%' }}>Formations</p>
@@ -45,7 +46,7 @@ export default function StartCompany(props) {
                         </p>
                     </Grid>
                     <Grid item md={6} style={{ width: '100%', display: "flex", justifyContent: matches_md ? 'left' : 'right', alignItems: 'start', marginTop: matches_md ? '4%' : '' }}>
-                        <Button onClick={handleCompanyClick} startIcon={props.icon} variant="outlined" style={{ borderRadius: 12, fontSize: 13, padding: matches_md ? '4% 6%' : '3%', color: '#7A00FF', border: '2px solid #7A00FF' }}>
+                        <Button onClick={handleCompanyClick} startIcon={props.icon} variant="outlined" style={{ borderRadius: 12, fontSize: 13, padding: matches_md ? '4% 6%' : '3%', color: primaryColor, border: `2px solid ${primaryColor}` }}>
                             {props.btnText}
                         </Button>
                     </Grid>

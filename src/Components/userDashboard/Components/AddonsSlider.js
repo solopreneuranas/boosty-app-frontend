@@ -18,6 +18,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import { primaryColor } from '../../globalVariables';
 
 export default function AddonsSlider(props) {
 
@@ -166,8 +167,8 @@ export default function AddonsSlider(props) {
                         <Button onClick={() => handleCart(item)} startIcon={<ShoppingCartOutlinedIcon />} variant='outined'
                             style={{
                                 marginTop: '5%',
-                                color: keys.includes(item.key + "") ? 'gray' : '#7A00FF',
-                                border: keys.includes(item.key + "") ? '2px solid gray' : '2px solid #7A00FF',
+                                color: keys.includes(item.key + "") ? 'gray' : primaryColor,
+                                border: keys.includes(item.key + "") ? '2px solid gray' : `2px solid ${primaryColor}`,
                                 borderRadius: 10,
                                 padding: '3% 6%',
                                 fontWeight: 500

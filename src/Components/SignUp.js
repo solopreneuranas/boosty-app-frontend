@@ -131,7 +131,7 @@ export default function SignUp() {
                         <div style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                             <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
                             <div style={{ width: 250, marginTop: '2%' }}>
-                                <LinearProgress color="secondary" />
+                                <LinearProgress color="primary" />
                             </div>
                         </div>
                     </>
@@ -143,7 +143,7 @@ export default function SignUp() {
                                     <></>
                                     :
                                     <>
-                                        <Grid item md={3} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3%', background: '#F7F0FF', color: 'black' }}>
+                                        <Grid item md={3} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3%', background: '#f0f0ff', color: 'black' }}>
                                             <FormSidebar
                                                 title="Create account & manage Tasks easily"
                                                 para="Choose between JSON Web Token, Firebase, AWS Amplify or Auth0. Regular login/register functionality is also available."

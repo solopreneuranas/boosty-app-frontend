@@ -19,6 +19,7 @@ import StartCompany from "./StartCompany";
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { primaryColor } from "../../globalVariables";
 
 export default function DashboardComponent(props) {
 
@@ -217,7 +218,7 @@ export default function DashboardComponent(props) {
                                 }
                             </Grid>
                             <Grid item md={12} style={{ width: '100%', display: "flex", justifyContent: 'left', alignItems: 'start', marginTop: '6%' }}>
-                                <Button onClick={handleCompanyClick} startIcon={<StoreOutlinedIcon />} variant="outlined" style={{ borderRadius: 7, fontSize: 13, padding: '1.5% 3%', color: '#7A00FF', border: '2px solid #7A00FF' }}>
+                                <Button onClick={handleCompanyClick} startIcon={<StoreOutlinedIcon />} variant="outlined" style={{ borderRadius: 7, fontSize: 13, padding: '1.5% 3%', color: primaryColor, border: `2px solid ${primaryColor}` }}>
                                     View your Company
                                 </Button>
                             </Grid>
@@ -258,8 +259,8 @@ export default function DashboardComponent(props) {
                                         boxShadow: 'none',
                                         padding: '3%',
                                         background: 'white',
-                                        color: '#7A00FF',
-                                        border: '2px solid #7A00FF',
+                                        color: primaryColor,
+                                        border: `2px solid ${primaryColor}`,
                                         borderRadius: 10
                                     }}
                                 >Book a free consultation</Button>

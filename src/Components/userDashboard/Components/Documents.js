@@ -14,6 +14,7 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { primaryColor } from "../../globalVariables";
 
 export default function Documents(props) {
 
@@ -67,9 +68,9 @@ export default function Documents(props) {
                         documents.map((item, i) => {
                             var docFormat = item.documents.split('.').pop().toUpperCase()
                             return (
-                                <div style={{ width: matches_md ? '100%' : 200, height: 70, borderRadius: '10px 10px 0 0', background: 'white', padding: matches_md ? '6%' : '4% 2%', position: "relative", marginTop: matches_md ? '4%' : '2%', borderBottom: '5px solid #7A00FF', boxShadow: '3px 3px 20px #ededed', }}>
-                                    <div onClick={() => handleDownloadFile(item.documents)} style={{ position: "absolute", padding: '1% 2%', borderRadius: 5, top: '10%', right: '6%', background: '#F4F5FF', color: '#7A00FF', width: 80, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%', cursor: "pointer" }}>
-                                        <GetAppOutlinedIcon style={{ color: '#7A00FF' }} />
+                                <div style={{ width: matches_md ? '100%' : 200, height: 70, borderRadius: '10px 10px 0 0', background: 'white', padding: matches_md ? '6%' : '4% 2%', position: "relative", marginTop: matches_md ? '4%' : '2%', borderBottom: `5px solid ${primaryColor}`, boxShadow: '3px 3px 20px #ededed', }}>
+                                    <div onClick={() => handleDownloadFile(item.documents)} style={{ position: "absolute", padding: '1% 2%', borderRadius: 5, top: '10%', right: '6%', background: '#F4F5FF', color: primaryColor, width: 80, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%', cursor: "pointer" }}>
+                                        <GetAppOutlinedIcon style={{ color: primaryColor }} />
                                         {docFormat}
                                     </div>
                                     <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 19 : 17, width: '50%' }}>{item.name}</h3>

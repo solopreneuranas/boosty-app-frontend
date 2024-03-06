@@ -40,6 +40,8 @@ import DashboardDrawerMobile from '../Components/DashboardDrawerMobile';
 import MarkunreadOutlinedIcon from '@mui/icons-material/MarkunreadOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import Mailroom from '../Components/Mailroom';
+import { primaryColor } from '../../globalVariables';
+
 
 const useStylesTextField = makeStyles((theme) => ({
     roundedTextField: {
@@ -174,13 +176,13 @@ export default function Dashboard(props) {
                                                         style={{
                                                             margin: '2% 0',
                                                             color: selectedItemIndex === i ? 'white' : 'black',
-                                                            borderLeft: selectedItemIndex === i ? '3px solid #7a00ff' : '3px solid white'
+                                                            borderLeft: selectedItemIndex === i ? `3px solid ${primaryColor}` : '3px solid white'
                                                         }}
                                                     >
-                                                        <ListItemIcon style={{ color: selectedItemIndex === i ? '#7a00ff' : 'black', opacity: '100%', fontSize: '15px', opacity: selectedItemIndex === i ? '100%' : '75%' }}>
+                                                        <ListItemIcon style={{ color: selectedItemIndex === i ? primaryColor : 'black', opacity: '100%', fontSize: '15px', opacity: selectedItemIndex === i ? '100%' : '75%' }}>
                                                             {item.icon}
                                                         </ListItemIcon>
-                                                        <p style={{ margin: 0, opacity: '100%', fontSize: '15px', color: selectedItemIndex === i ? '#7a00ff' : 'black' }}>{item.title}</p>
+                                                        <p style={{ margin: 0, opacity: '100%', fontSize: '15px', color: selectedItemIndex === i ? primaryColor : 'black' }}>{item.title}</p>
                                                     </ListItemButton>
                                                 </div>
                                             );

@@ -231,7 +231,7 @@ export default function Cart(props) {
                             {cartServices.map((item, i) => {
                                 return (
                                     <div style={{ marginTop: '2%', display: "flex", justifyContent: "right", textAlign: "left" }}>
-                                        <div onClick={() => handleAddonChip(item)} style={{ cursor: "pointer", borderRadius: 50, padding: '10px 20px', fontSize: 14, background: '#F7F0FF', display: "flex", alignItems: "center" }}>
+                                        <div onClick={() => handleAddonChip(item)} style={{ cursor: "pointer", borderRadius: 50, padding: '10px 20px', fontSize: 14, background: '#f0f0ff', display: "flex", alignItems: "center" }}>
                                             <CancelIcon style={{ opacity: '20%' }} />
                                             <p style={{ fontSize: matches_md ? 12 : 14 }}>{item.title}</p>
                                         </div>
