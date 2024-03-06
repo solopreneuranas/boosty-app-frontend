@@ -27,6 +27,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import AllCustomers from '../Components/AllCustomers';
 import CompanyDetails from '../Components/CompanyDetails';
 import UserDetails from '../Components/UserDetails';
+import DashboardComponent from '../Components/DashboardComponent';
 
 const useStylesTextField = makeStyles((theme) => ({
     roundedTextField: {
@@ -68,15 +69,15 @@ export default function AdminDashboard(props) {
     }
 
     const listItems = [
-        // {
-        //     icon: <DashboardIcon />,
-        //     title: 'Dashboard',
-        //     link: '/admindashboard'
-        // },
+        {
+            icon: <DashboardIcon />,
+            title: 'Dashboard',
+            link: '/admindashboard'
+        },
         {
             icon: <StoreOutlinedIcon />,
             title: 'Companies',
-            link: '/admindashboard'
+            link: '/admindashboard/companies'
         },
         {
             icon: <PermIdentityOutlinedIcon />,
@@ -174,8 +175,8 @@ export default function AdminDashboard(props) {
                             height: '100%', width: '100%'
                         }}>
                             <Routes>
-                                {/* <Route element={<DashboardComponent />} path="/" /> */}
-                                <Route element={<AllCompanies />} path="/" />
+                                <Route element={<DashboardComponent />} path="/" />
+                                <Route element={<AllCompanies />} path="/companies" />
                                 <Route element={<CompanyDetails />} path="/company-details" />
                                 <Route element={<AllCustomers />} path="/customers" />
                                 <Route element={<UserDetails />} path="/user-details" />
