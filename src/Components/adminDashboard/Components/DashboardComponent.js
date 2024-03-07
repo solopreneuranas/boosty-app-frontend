@@ -99,27 +99,27 @@ export default function DashboardComponent(props) {
     const dashboardItems = [
         {
             title: "Total Companies",
-            number: companies?.length,
+            number: companies?.length - 1,
             icon: <StoreOutlinedIcon style={{ position: "absolute", right: '5%', top: '5%', opacity: '10%', width: 40, height: 40 }} />
         },
         {
             title: "Total Sales",
-            number: `$${totalOrderAmount}`,
+            number: `$${totalOrderAmount - 833}`,
             icon: <AttachMoneyOutlinedIcon style={{ position: "absolute", right: '5%', top: '5%', opacity: '10%', width: 40, height: 40 }} />
         },
         {
             title: "Total Documents",
-            number: documents?.length,
+            number: documents?.length - 1,
             icon: <TextSnippetOutlinedIcon style={{ position: "absolute", right: '5%', top: '5%', opacity: '10%', width: 40, height: 40 }} />
         },
         {
             title: "Total Mails",
-            number: mails?.length,
+            number: mails?.length - 1,
             icon: <EmailOutlinedIcon style={{ position: "absolute", right: '5%', top: '5%', opacity: '10%', width: 40, height: 40 }} />
         },
         {
             title: "Total Customers",
-            number: customers?.length,
+            number: customers?.length - 1,
             icon: <PersonOutlineOutlinedIcon style={{ position: "absolute", right: '5%', top: '5%', opacity: '10%', width: 40, height: 40 }} />
         }
     ]
