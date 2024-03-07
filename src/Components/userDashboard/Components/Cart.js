@@ -13,12 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import ReactDOM from 'react-dom';
 import { loadStripe } from '@stripe/stripe-js';
-import {
-    PaymentElement,
-    Elements,
-    useStripe,
-    useElements,
-} from '@stripe/react-stripe-js';
+
 
 export default function Cart(props) {
 
@@ -58,27 +53,19 @@ export default function Cart(props) {
     var company = props.company
     var user = JSON.parse(localStorage.getItem("User"))
 
-    const discountPercentage = 25;
-
     const months = [
         "January", "February", "March", "April",
         "May", "June", "July", "August",
         "September", "October", "November", "December"
     ]
 
-    const addonsServicesCost = cartServices.reduce((accumulator, currentItem) => {
-        return accumulator + currentItem.price;
-    }, 0);
-    const finalAddonsServicesCost = addonsServicesCost - (addonsServicesCost * discountPercentage / 100);
-
-    const finalCost = (cartServicesCost - (cartServicesCost * discountPercentage / 100) + 150);
+    const discountPercentage = 25;
+    // const finalCost = cartServicesCost - (cartServicesCost * discountPercentage / 100);
+    const finalCost = props?.screen === 'Registeration' ? (cartServicesCost + 199) : cartServicesCost;
 
     useEffect(() => {
         if (props.setOrderAmount) {
             props.setOrderAmount(finalCost)
-        }
-        if (props.setAddonsAmount) {
-            props.setAddonsAmount(finalAddonsServicesCost)
         }
     }, [finalCost])
 
@@ -152,9 +139,9 @@ export default function Cart(props) {
                             {props.addons.map((item, i) => {
                                 return (
                                     <div style={{ marginTop: '2%', display: "flex", justifyContent: "right", textAlign: "left" }}>
-                                        <div onClick={() => handleAddonChip(item)} style={{ cursor: "pointer", borderRadius: 50, padding: '10px 20px', fontSize: 14, background: '#F7F0FF', display: "flex", alignItems: "center" }}>
+                                        <div onClick={() => handleAddonChip(item)} style={{ cursor: "pointer", borderRadius: 50, padding: '10px 20px', fontSize: 14, background: '#f0f0ff', display: "flex", alignItems: "center" }}>
                                             <CancelIcon style={{ opacity: '20%' }} />
-                                            <p style={{ fontSize: matches_md ? 12 : 14 }}>{item.title}</p>
+                                            <p style={{ fontSize: matches_md ? 12 : 14 }}>{item?.title} (${item?.price})</p>
                                         </div>
                                     </div>
                                 )
@@ -167,7 +154,7 @@ export default function Cart(props) {
                                     <div style={{ marginTop: '2%', display: "flex", justifyContent: "right", textAlign: "left" }}>
                                         <div onClick={() => handleAddonChip(item)} style={{ cursor: "pointer", borderRadius: 50, padding: '10px 20px', fontSize: 14, background: '#f0f0ff', display: "flex", alignItems: "center" }}>
                                             <CancelIcon style={{ opacity: '20%' }} />
-                                            <p style={{ fontSize: matches_md ? 12 : 14 }}>{item.title}</p>
+                                            <p style={{ fontSize: matches_md ? 12 : 14 }}>{item?.title} (${item?.price})</p>
                                         </div>
                                     </div>
                                 )
@@ -185,16 +172,12 @@ export default function Cart(props) {
             para: props.companyName ? 'LLC Formation Service' : 'Addons Services'
         },
         {
+            title: 'Boosty LLC Plan',
+            para: props?.screen === 'Registeration' ? `$${props?.stateFee + 199}` : ''
+        },
+        {
             title: 'Addons',
             para: addonsServicesList()
-        },
-        {
-            title: 'Amount',
-            para: `$${cartServicesCost}`
-        },
-        {
-            title: 'Discount',
-            para: "-" + discountPercentage + "%"
         }
     ]
 
@@ -269,9 +252,6 @@ export default function Cart(props) {
                         </>
                 }
             </div>
-            {/* <Elements stripe={stripePromise} options={options}>
-                <CheckoutForm />
-            </Elements> */}
         </div>
     )
 }
