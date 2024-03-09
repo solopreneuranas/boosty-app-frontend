@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, ProgressBar, Row, Col } from 'react-bootstrap';
-import { TextField, Grid, Button } from '@material-ui/core';
+import { TextField, Grid, Button, LinearProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Autocomplete from '@mui/material/Autocomplete';
 import Alert from '@mui/material/Alert';
@@ -95,6 +95,8 @@ export default function RegisterCompany(props) {
     const [memberData, setMemberData] = useState([])
 
     var memberDataArray = memberData.map(item => item)
+
+    const [orderConfirm, setOrderConfirm] = useState(false)
 
     const classes = useStyles();
     const [step, setStep] = useState(1);
@@ -377,7 +379,6 @@ export default function RegisterCompany(props) {
             "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
         ]
 
-
         const handleItin = (event) => {
             setItin(event.target.value)
             if (event.target.value == 'yes') {
@@ -451,10 +452,12 @@ export default function RegisterCompany(props) {
                 formData.append('addonsorderdate', new Date())
 
                 var response = await postData('company/create-company', formData)
+                setOrderConfirm(true)
                 if (response.status === true) {
                     var body = { 'userid': userId, 'agent': 'False', 'address': 'False', 'formation': 'False', 'ein': 'False', 'boi': 'False', 'agreement': 'False', 'bank': 'False', }
                     var result = await postData('orderstatus/create-order-status', body)
                     if (result.status === true) {
+                        setOrderConfirm(false)
                         navigate('/dashboard/order-successfull', { state: { title: 'Company formation' } })
                         window.scrollTo(0, 0)
                     }
@@ -943,14 +946,29 @@ export default function RegisterCompany(props) {
 
     return (
         <div>
-            <div style={{ width: matches_md ? '100%' : '60%', marginBottom: '3%' }}>
-                <Alert icon={<ErrorOutlineOutlinedIcon fontSize="inherit" />} severity="warning">
-                    <font style={{ fontWeight: 500 }}>Do not refresh</font> the page untill the registeration form is completed!
-                </Alert>
-            </div>
-            <div style={{ width: matches_md ? '90%' : '95%', margin: 'auto', boxShadow: '3px 3px 20px #ededed', padding: matches_md ? '6%' : '3%', background: 'white', borderRadius: 10 }}>
-                {registerCompanyComponent()}
-            </div>
+            {
+                orderConfirm ?
+                    <>
+                        <div style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <img src='/images/boosty-app-logo.svg' style={{ width: 150 }} />
+                            <p style={{ marginTop: '2%', opacity: '70%' }}>Your order is being placed...</p>
+                            <div style={{ width: 250, marginTop: '2%' }}>
+                                <LinearProgress color="primary" />
+                            </div>
+                        </div>
+                    </>
+                    :
+                    <>
+                        <div style={{ width: matches_md ? '100%' : '60%', marginBottom: '3%' }}>
+                            <Alert icon={<ErrorOutlineOutlinedIcon fontSize="inherit" />} severity="warning">
+                                <font style={{ fontWeight: 500 }}>Do not refresh</font> the page untill the registeration form is completed!
+                            </Alert>
+                        </div>
+                        <div style={{ width: matches_md ? '90%' : '95%', margin: 'auto', boxShadow: '3px 3px 20px #ededed', padding: matches_md ? '6%' : '3%', background: 'white', borderRadius: 10 }}>
+                            {registerCompanyComponent()}
+                        </div>
+                    </>
+            }
         </div>
     )
 }

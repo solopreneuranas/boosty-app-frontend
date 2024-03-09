@@ -703,6 +703,26 @@ export default function CompanyDetails(props) {
         setIsItin(event.target.value)
     }
 
+    const handleDelete = async () => {
+        var body = { '_id': company?._id }
+        let response = await postData('company/delete_company', body)
+        if (response?.status) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Company Deleted!',
+                timer: 2000,
+                toast: true
+            })
+            navigate('/admindashboard/companies')
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Company not Deleted!'
+            })
+        }
+    }
+
     const userCompany = () => {
         return (
             <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
@@ -720,6 +740,9 @@ export default function CompanyDetails(props) {
                         </Button>
                         <Button onClick={handleLoginAccount} variant="outlined" style={{ width: matches_md ? '100%' : '', boxShadow: 'none', borderRadius: matches_md ? 5 : 10, marginTop: '2%', height: 50, marginLeft: matches_md ? '' : '1%', color: '#8000ff', padding: matches_md ? '3% 6%' : '1% 2%', border: '2px solid #8000ff' }}>
                             Login to Dashboard
+                        </Button>
+                        <Button onClick={handleDelete} variant="outlined" style={{ width: matches_md ? '100%' : '', boxShadow: 'none', borderRadius: matches_md ? 5 : 10, marginTop: '2%', height: 50, marginLeft: matches_md ? '' : '1%', color: 'red', padding: matches_md ? '3% 6%' : '1% 2%', border: '2px solid red' }}>
+                            Delete
                         </Button>
                     </Grid>
                 </Grid>

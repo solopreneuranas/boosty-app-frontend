@@ -106,6 +106,26 @@ export default function UserDetails(props) {
         }
     }
 
+    const handleDeleteUser = async () => {
+        let body = { "_id": user._id }
+        let response = await postData('user/delete_user', body)
+        if (response?.status) {
+            Swal.fire({
+                icon: 'success',
+                title: 'User Deleted!',
+                timer: 2000,
+                toast: true
+            })
+            navigate('/admindashboard/customers')
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'User not Deleted!'
+            })
+        }
+    }
+
     const userCompany = () => {
         return (
             <div style={{ background: 'white', borderRadius: 10, padding: matches_md ? '6%' : '3% 3% 5%', border: '1px solid gainsboro' }}>
@@ -119,6 +139,9 @@ export default function UserDetails(props) {
                         </Button>
                         <Button onClick={handleLoginAccount} variant="outlined" style={{ width: matches_md ? '100%' : '', boxShadow: 'none', borderRadius: matches_md ? 5 : 10, marginTop: '2%', height: 50, marginLeft: matches_md ? '' : '1%', color: '#8000ff', padding: matches_md ? '3% 6%' : '1% 2%', border: '2px solid #8000ff' }}>
                             Login to Dashboard
+                        </Button>
+                        <Button onClick={handleDeleteUser} variant="outlined" style={{ width: matches_md ? '100%' : '', boxShadow: 'none', borderRadius: matches_md ? 5 : 10, marginTop: '2%', height: 50, marginLeft: matches_md ? '' : '1%', color: 'red', padding: matches_md ? '3% 6%' : '1% 2%', border: '2px solid red' }}>
+                            Delete
                         </Button>
                     </Grid>
                 </Grid>
