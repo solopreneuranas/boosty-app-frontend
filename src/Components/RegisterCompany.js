@@ -450,6 +450,8 @@ export default function RegisterCompany(props) {
                 formData.append('membersdata', JSON.stringify(memberData))
                 formData.append('addons', JSON.stringify(addons))
                 formData.append('addonsorderdate', new Date())
+                formData.append('useraccountemail', user[0].email)
+                formData.append('useraccountname', `${user[0].firstname} ${user[0].lastname}`)
 
                 var response = await postData('company/create-company', formData)
                 setOrderConfirm(true)

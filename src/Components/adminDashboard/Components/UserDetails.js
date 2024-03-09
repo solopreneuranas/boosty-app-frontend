@@ -107,23 +107,23 @@ export default function UserDetails(props) {
     }
 
     const handleDeleteUser = async () => {
-        let body = { "_id": user._id }
-        let response = await postData('user/delete_user', body)
-        if (response?.status) {
-            Swal.fire({
-                icon: 'success',
-                title: 'User Deleted!',
-                timer: 2000,
-                toast: true
-            })
-            navigate('/admindashboard/customers')
-        }
-        else {
-            Swal.fire({
-                icon: 'error',
-                title: 'User not Deleted!'
-            })
-        }
+
+        Swal.fire({
+            title: 'Do you want to delete the User?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            denyButtonText: `Don't delete`,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                let body = { "_id": user._id }
+                let response = await postData('user/delete_user', body)
+                Swal.fire('User Deleted!', '', 'success')
+                navigate('/admindashboard/customers')
+            } else if (result.isDenied) {
+                Swal.fire('User not Deleted', '', 'info')
+            }
+        })
     }
 
     const userCompany = () => {

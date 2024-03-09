@@ -704,23 +704,22 @@ export default function CompanyDetails(props) {
     }
 
     const handleDelete = async () => {
-        var body = { '_id': company?._id }
-        let response = await postData('company/delete_company', body)
-        if (response?.status) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Company Deleted!',
-                timer: 2000,
-                toast: true
-            })
-            navigate('/admindashboard/companies')
-        }
-        else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Company not Deleted!'
-            })
-        }
+        Swal.fire({
+            title: 'Do you want to delete the Company?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            denyButtonText: `Don't delete`,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                var body = { '_id': company?._id }
+                let response = await postData('company/delete_company', body)
+                Swal.fire('Company Deleted!', '', 'success')
+                navigate('/admindashboard/companies')
+            } else if (result.isDenied) {
+                Swal.fire('Company not Deleted', '', 'info')
+            }
+        })
     }
 
     const userCompany = () => {
