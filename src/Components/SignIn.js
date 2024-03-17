@@ -22,6 +22,8 @@ import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import LinearProgress from '@mui/material/LinearProgress';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
     roundedTextField: {
@@ -82,12 +84,6 @@ export default function SignIn() {
             if (response.status === true) {
                 setLoadingPage(false)
                 localStorage.setItem('User', JSON.stringify(response.data))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login successful!',
-                    timer: 2000,
-                    toast: true
-                })
                 navigate('/dashboard')
             }
             else {
@@ -129,6 +125,7 @@ export default function SignIn() {
 
     return (
         <div className='root' style={{ height: '100%', background:  'white' }}>
+            <ToastContainer />
             {
                 loadingPage ?
                     <>
@@ -159,20 +156,6 @@ export default function SignIn() {
                             }
                             <Grid item md={matches_md ? 12 : 9} style={loginFormGrid}>
                                 <Grid container spacing={3} style={loginForm}>
-                                    {/* {
-                                        status === true ?
-                                            <>
-                                                <Grid item xs={12} style={{ width: '100%' }}>
-                                                    <div style={{ width: '100%' }}>
-                                                        <Alert icon={<CheckCircleOutlinedIcon fontSize="inherit" />} severity="success">
-                                                            Your account has been created, <font style={{ fontWeight: 500 }}>Sign in now!</font>
-                                                        </Alert>
-                                                    </div>
-                                                </Grid>
-                                            </>
-                                            :
-                                            <></>
-                                    } */}
                                     {
                                         matches_md ?
                                             <>

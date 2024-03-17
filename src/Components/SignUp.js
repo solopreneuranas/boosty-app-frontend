@@ -9,9 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useState } from 'react';
-import Checkbox from '@mui/material/Checkbox';
-import Swal from 'sweetalert2'
+import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
 import { postData } from '../Services/FetchNodeServices';
@@ -45,6 +43,8 @@ export default function SignUp() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [loadingPage, setLoadingPage] = useState(false)
 
+    const [orgOtp, setOrgOtp] = useState('')
+
     const handleClickShowPassword = () => setShowPassword((show) => !show)
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -75,29 +75,24 @@ export default function SignUp() {
         return error
     }
 
+    const generateOtp = () => {
+        var otpValue = parseInt((Math.random() * 8999) + 1000)
+        setOrgOtp(otpValue)
+    }
+
+    useEffect(() => {
+        generateOtp()
+    }, [])
+
     const handleCreateAccount = async () => {
         setLoadingPage(true)
         var error = validation()
         if (error === false) {
-            var body = { 'firstname': firstName, 'lastname': lastName, 'mobileno': mobileNo, 'email': email, 'password': password }
-            var response = await postData('user/create-account', body)
-            if (response.status === true) {
-                localStorage.setItem('User', JSON.stringify([body]))
+            let body = { 'firstname': firstName, 'lastname': lastName, 'mobileno': mobileNo, 'email': email, 'password': password }
+            let response = await postData('user/verify-otp', { ...body, otp: orgOtp })
+            if (response?.status) {
                 setLoadingPage(false)
-                Swal.fire({
-                    icon: 'success',
-                    toast: true,
-                    timer: 2000,
-                    title: 'Your account has been created!'
-                })
-                navigate('/dashboard', { state: { status: true } })
-            }
-            else {
-                setLoadingPage(false)
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Account not created!'
-                })
+                navigate('/verify-otp', { state: { status: 'user', userData: body, otp: orgOtp } })
             }
         }
     }
@@ -120,7 +115,6 @@ export default function SignUp() {
         backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',
-        //boxShadow: '5px 5px 20px #e9d4ff',
     }
 
     return (

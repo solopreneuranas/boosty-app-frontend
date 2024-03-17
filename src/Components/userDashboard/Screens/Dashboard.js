@@ -6,7 +6,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import ListIcon from '@mui/icons-material/List';
@@ -41,7 +41,8 @@ import MarkunreadOutlinedIcon from '@mui/icons-material/MarkunreadOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import Mailroom from '../Components/Mailroom';
 import { primaryColor } from '../../globalVariables';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStylesTextField = makeStyles((theme) => ({
     roundedTextField: {
@@ -61,7 +62,6 @@ export default function Dashboard(props) {
     const classes = useStylesTextField()
     const [status, setStatus] = useState(false)
 
-
     const [selectedItemIndex, setSelectedItemIndex] = useState('')
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
@@ -78,7 +78,7 @@ export default function Dashboard(props) {
     }, [])
 
     const handleLogout = () => {
-        localStorage.clear()
+        localStorage.removeItem('User')
         navigate('/login')
     }
 
@@ -124,9 +124,10 @@ export default function Dashboard(props) {
             setStatus(true)
         }
     }
-
+    
     return (
         <div style={{ height: '100%' }}>
+            <ToastContainer />
             <Grid container spacing={1} style={{ width: '100%', margin: 0, height: '100%' }}>
                 {
                     matches_md ?

@@ -4,16 +4,10 @@ import { serverURL, postData } from "../../../Services/FetchNodeServices";
 import { useState, useEffect } from "react";
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 import { useNavigate } from "react-router-dom";
-import CircularProgress from '@mui/material/CircularProgress';
-import AddIcon from '@mui/icons-material/Add';
-import StartCompany from "./StartCompany";
-import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
-import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
 import { primaryColor } from "../../globalVariables";
 
 export default function Documents(props) {
@@ -66,14 +60,27 @@ export default function Documents(props) {
                 <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: '3%', }}>
                     {
                         documents.map((item, i) => {
-                            var docFormat = item.documents.split('.').pop().toUpperCase()
+                            let docFormat = item.documents.split('.').pop().toUpperCase()
                             return (
-                                <div style={{ width: matches_md ? '100%' : 200, height: 70, borderRadius: '10px 10px 0 0', background: 'white', padding: matches_md ? '6%' : '4% 2%', position: "relative", marginTop: matches_md ? '4%' : '2%', borderBottom: `5px solid ${primaryColor}`, boxShadow: '3px 3px 20px #ededed', }}>
-                                    <div onClick={() => handleDownloadFile(item.documents)} style={{ position: "absolute", padding: '1% 2%', borderRadius: 5, top: '10%', right: '6%', background: '#F4F5FF', color: primaryColor, width: 80, display: "flex", justifyContent: "center", alignItems: "center", gap: '4%', cursor: "pointer" }}>
-                                        <GetAppOutlinedIcon style={{ color: primaryColor }} />
-                                        {docFormat}
-                                    </div>
-                                    <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 19 : 17, width: '50%' }}>{item.name}</h3>
+                                <div style={{ width: matches_md ? '100%' : '35%', borderRadius: '15px', background: 'white', padding: matches_md ? '6%' : '3%', position: "relative", marginTop: matches_md ? '4%' : '2%', border: '4px solid #dbdfff' }}>
+                                    <img src='/images/file-icon.svg' style={{ width: 50, height: 50, marginBottom: '7%' }} />
+                                    <h3 style={{ margin: 0, fontWeight: 600, fontSize: matches_md ? 19 : 19, width: '100%' }}>{item?.name}</h3>
+                                    <p style={{ fontSize: 14, opacity: '70%', lineHeight: '23px', marginTop: '4%' }}>{item?.description}</p>
+                                    <Button
+                                        onClick={() => handleDownloadFile(item?.documents)}
+                                        style={{
+                                            // position: "absolute",
+                                            // bottom: '8%',
+                                            marginTop: '5%',
+                                            color: primaryColor,
+                                            border: `2px solid ${primaryColor}`,
+                                            borderRadius: 12,
+                                            padding: '2% 7%',
+                                            fontWeight: 600
+                                        }}
+                                    >
+                                        View .{docFormat}
+                                    </Button>
                                 </div>
                             )
                         })
@@ -97,9 +104,10 @@ export default function Documents(props) {
                 loadingStatus == true ?
                     <>
                         <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: '2%', marginTop: '5%' }}>
-                            <Skeleton variant="rounded" width={matches_md ? '100%' : '30%'} height={150} style={{ marginTop: matches_md ? '3%' : 0 }} />
-                            <Skeleton variant="rounded" width={matches_md ? '100%' : '30%'} height={150} style={{ marginTop: matches_md ? '3%' : 0 }} />
-                            <Skeleton variant="rounded" width={matches_md ? '100%' : '30%'} height={150} style={{ marginTop: matches_md ? '3%' : 0 }} />
+                            <Skeleton variant="rounded" width={matches_md ? '100%' : '40%'} height={250} style={{ marginTop: '3%' }} />
+                            <Skeleton variant="rounded" width={matches_md ? '100%' : '40%'} height={250} style={{ marginTop: '3%' }} />
+                            <Skeleton variant="rounded" width={matches_md ? '100%' : '40%'} height={250} style={{ marginTop: '3%' }} />
+                            <Skeleton variant="rounded" width={matches_md ? '100%' : '40%'} height={250} style={{ marginTop: '3%' }} />
                         </div>
                     </>
                     :

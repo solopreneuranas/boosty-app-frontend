@@ -28,6 +28,8 @@ import AllCustomers from '../Components/AllCustomers';
 import CompanyDetails from '../Components/CompanyDetails';
 import UserDetails from '../Components/UserDetails';
 import DashboardComponent from '../Components/DashboardComponent';
+import AdminTickets from '../Components/AdminTickets';
+import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
 
 const useStylesTextField = makeStyles((theme) => ({
     roundedTextField: {
@@ -64,7 +66,7 @@ export default function AdminDashboard(props) {
     }, [])
 
     const handleLogout = () => {
-        localStorage.clear()
+        localStorage.removeItem('Admin')
         navigate('/adminlogin')
     }
 
@@ -83,6 +85,11 @@ export default function AdminDashboard(props) {
             icon: <PermIdentityOutlinedIcon />,
             title: 'Customers',
             link: '/admindashboard/customers'
+        },
+        {
+            icon: <HelpCenterOutlinedIcon />,
+            title: 'Tickets',
+            link: '/admindashboard/tickets'
         }
     ]
 
@@ -180,6 +187,7 @@ export default function AdminDashboard(props) {
                                 <Route element={<CompanyDetails />} path="/company-details" />
                                 <Route element={<AllCustomers />} path="/customers" />
                                 <Route element={<UserDetails />} path="/user-details" />
+                                <Route element={<AdminTickets />} path="/tickets" />
                             </Routes>
                         </Grid>
                     </Grid>

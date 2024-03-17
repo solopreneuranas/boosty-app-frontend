@@ -55,8 +55,8 @@ export default function CompanyDetails(props) {
     const [openMail, setOpenMail] = React.useState(false);
 
     const [docTitle, setDocTitle] = useState('')
+    const [docDescp, setDocDescp] = useState('')
     const handleOpen = () => setOpen(true);
-    // const handleClose = () => setOpen(false);
 
     const handleClose = () => {
         setOpen(false)
@@ -406,6 +406,7 @@ export default function CompanyDetails(props) {
         formData.append('companyid', company._id)
         formData.append('userid', company.userid)
         formData.append('name', docTitle)
+        formData.append('description', docDescp)
         formData.append('documents', doc.bytes)
         formData.append('docdate', new Date())
         var response = await postData('document/create-document', formData)
@@ -418,6 +419,7 @@ export default function CompanyDetails(props) {
                 timer: 2000
             })
             setDocTitle('')
+            setDocDescp('')
             setDoc({ bytes: '', filename: '' })
         }
         else {
@@ -462,6 +464,9 @@ export default function CompanyDetails(props) {
                     </Typography>
                     <Grid item md={12} style={{ margin: '5% 0' }}>
                         <TextField fullWidth value={docTitle} onChange={(e) => setDocTitle(e.target.value)} variant="outlined" label="Document Name" />
+                    </Grid>
+                    <Grid item md={12} style={{ margin: '5% 0' }}>
+                        <TextField fullWidth value={docDescp} onChange={(e) => setDocDescp(e.target.value)} variant="outlined" label="Document Description" />
                     </Grid>
                     <Button
                         onChange={handleDoc} component="label" variant="outlined" startIcon={<CloudUploadIcon />}
