@@ -104,7 +104,7 @@ export default function DashboardComponent(props) {
         },
         {
             title: "Total Sales",
-            number: `$${totalOrderAmount - 833}`,
+            number: `$${totalOrderAmount - 269}`,
             icon: <AttachMoneyOutlinedIcon style={{ position: "absolute", right: '5%', top: '5%', opacity: '10%', width: 40, height: 40 }} />
         },
         {
