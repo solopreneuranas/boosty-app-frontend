@@ -60,6 +60,8 @@ export default function Mailroom(props) {
         window.URL.revokeObjectURL(blobUrl);
     }
 
+    console.log('mails', mails);
+
     const agent = () => {
         return mails.slice(0, 1).map((item, i) => {
             var date = new Date(item.maildate);
@@ -73,8 +75,8 @@ export default function Mailroom(props) {
                         <EmailOutlinedIcon style={{ opacity: '70%', width: 50, height: 50, color: primaryColor }} />
                         <h3 style={{ fontWeight: 550, fontSize: 20, marginBottom: '6%' }}>Mailing Address</h3>
                         <p style={{ opacity: '70%', margin: '1% 0' }}>Active until {formattedDate}</p>
-                        <p style={{ opacity: '70%', margin: '1% 0' }}>{item.companyData[0].agentname}</p>
-                        <p style={{ opacity: '70%', margin: '1% 0' }}>{item.companyData[0].agentaddress}</p>
+                        <p style={{ opacity: '70%', margin: '1% 0' }}>{item.companyData[0]?.agentname}</p>
+                        <p style={{ opacity: '70%', margin: '1% 0' }}>{item.companyData[0]?.agentaddress}</p>
                     </Grid>
                 </div>
             )

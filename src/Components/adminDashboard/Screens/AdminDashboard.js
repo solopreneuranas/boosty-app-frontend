@@ -86,11 +86,11 @@ export default function AdminDashboard(props) {
             title: 'Customers',
             link: '/admindashboard/customers'
         },
-        {
-            icon: <HelpCenterOutlinedIcon />,
-            title: 'Tickets',
-            link: '/admindashboard/tickets'
-        }
+        // {
+        //     icon: <HelpCenterOutlinedIcon />,
+        //     title: 'Tickets',
+        //     link: '/admindashboard/tickets'
+        // }
     ]
 
     const handleListItem = (item, i) => {

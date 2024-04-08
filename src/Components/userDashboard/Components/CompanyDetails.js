@@ -17,7 +17,10 @@ export default function CompanyDetails(props) {
     const theme = useTheme();
     const matches_sm = useMediaQuery(theme.breakpoints.down('sm'));
     const matches_md = useMediaQuery(theme.breakpoints.down('md'));
-    const membersDataArray = JSON.parse(company.membersdata)
+
+    // const membersDataArray = JSON.parse(company.membersdata)
+    const [membersDataArray, setMembersDataArray] = useState(Array.isArray(company.membersdata) ? company.membersdata : []);
+
 
     const months = [
         "January", "February", "March", "April",

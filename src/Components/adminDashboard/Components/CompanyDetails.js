@@ -47,7 +47,8 @@ export default function CompanyDetails(props) {
     const theme = useTheme();
     const matches_sm = useMediaQuery(theme.breakpoints.down('sm'));
     const matches_md = useMediaQuery(theme.breakpoints.down('md'));
-    const membersDataArray = JSON.parse(company.membersdata)
+    // const membersDataArray = JSON.parse(company.membersdata)
+    const [membersDataArray, setMembersDataArray] = useState(Array.isArray(company.membersdata) ? company.membersdata : []);
     const [doc, setDoc] = useState({ bytes: '', filename: '' })
     const [status, setStatus] = useState(false)
     const [documents, setDocuments] = useState([])
@@ -298,6 +299,7 @@ export default function CompanyDetails(props) {
             'memberfirstname': memberFirstName,
             'memberlastname': memberLastName,
             'memberownership': memberOwnership,
+            'membersdata': membersDataArray,
             'legalfirstname': legalFirstName,
             'legallastname': legalLastName,
             'legalemail': legalEmail,
@@ -665,8 +667,6 @@ export default function CompanyDetails(props) {
         document.body.removeChild(link)
         window.URL.revokeObjectURL(blobUrl);
     }
-
-    console.log('company: ', company)
 
     const unChangeAbleCompanyInfo = [
         {
@@ -1302,6 +1302,12 @@ export default function CompanyDetails(props) {
         )
     }
 
+    const handleAllMembers = (e, i, type) => {
+        const newArr = [...membersDataArray]
+        newArr[i][type] = e.target.value
+        setMembersDataArray(newArr)
+    }
+
     const allMembers = () => {
         return membersDataArray.map((item, i) => {
             return (
@@ -1311,11 +1317,12 @@ export default function CompanyDetails(props) {
                             <div style={{ background: 'linear-gradient(to right, blue, #8000ff)', color: 'white', borderRadius: '100%', width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: "center" }}>
                                 {i + 2}
                             </div>
-                            <TextField label="Full name" className={classes.roundedTextField} value={`${item.firstname} ${item.lastname}`} variant="outlined" />
+                            <TextField onChange={(e) => handleAllMembers(e, i, 'firstname')} label="First name" className={classes.roundedTextField} value={item.firstname} variant="outlined" />
+                            <TextField onChange={(e) => handleAllMembers(e, i, 'lastname')} label="Last name" className={classes.roundedTextField} value={item.lastname} variant="outlined" />
                         </Grid>
                         <Grid item sm={6} style={{ width: '50%', display: 'flex', justifyContent: 'right', alignItems: "center" }}>
                             <p style={{ fontSize: 15, margin: '5% 0' }}>Ownership: </p>
-                            <TextField label="Ownership" className={classes.roundedTextField} value={item.ownership} variant="outlined" style={{ marginLeft: '2%' }} />
+                            <TextField onChange={(e) => handleAllMembers(e, i, 'ownership')} label="Ownership" className={classes.roundedTextField} value={item.ownership} variant="outlined" style={{ marginLeft: '2%' }} />
                         </Grid>
                     </Grid>
                 </div>

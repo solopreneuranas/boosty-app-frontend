@@ -447,7 +447,7 @@ export default function RegisterCompany(props) {
                 formData.append('companystatus', 'Pending')
                 formData.append('orderamount', orderAmount)
                 formData.append('orderdate', new Date())
-                formData.append('membersdata', JSON.stringify(memberData))
+                formData.append('membersdata', memberData)
                 formData.append('addons', JSON.stringify(addons))
                 formData.append('addonsorderdate', new Date())
                 formData.append('useraccountemail', user[0].email)
