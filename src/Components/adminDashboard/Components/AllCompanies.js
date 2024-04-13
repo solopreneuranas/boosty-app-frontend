@@ -106,7 +106,7 @@ export default function AllCompanies(props) {
                                         <h3 style={{ margin: 0, fontWeight: 500, fontSize: 14 }}>{item.companystate}</h3>
                                     </Grid>
                                     <Grid item xs={2} style={{ display: 'flex', alignItems: 'center' }}>
-                                        <h3 style={{ margin: 0, fontWeight: 500, fontSize: 14 }}>{item.userData[0].firstname} {item.userData[0].lastname}</h3>
+                                        <h3 style={{ margin: 0, fontWeight: 500, fontSize: 14 }}>{item?.userData[0]?.firstname} {item?.userData[0]?.lastname}</h3>
                                     </Grid>
                                     <Grid item xs={1} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         <h3 style={{ margin: 0, fontWeight: 500, fontSize: 14 }}>${item.orderamount}</h3>

@@ -1296,7 +1296,12 @@ export default function CompanyDetails(props) {
                             </Grid>
                         </Grid>
                     </div>
-                    {allMembers()}
+                    {
+                        membersDataArray[0] ?
+                            <>{allMembers()}</>
+                            :
+                            <></>
+                    }
                 </div>
             </div>
         )
@@ -1329,7 +1334,6 @@ export default function CompanyDetails(props) {
             )
         })
     }
-
 
     return (
         <div style={{ width: '97%', padding: '2% 3% 2% 1%' }}>
