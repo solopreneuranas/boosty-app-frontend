@@ -125,7 +125,7 @@ export default function Otp() {
         setOtpError(false)
     }
 
-    console.log({orgOtp});
+    console.log({ orgOtp });
 
     const handleCheckOtp = async () => {
         let stringOtp = otpArray.join('')
@@ -141,7 +141,7 @@ export default function Otp() {
             setLoading(false)
             toast.success('Your account has been created!', {
                 onClose: () => {
-                    navigate('/dashboard')
+                    navigate('/login', { state: { status: true } })
                 }
             });
         }
@@ -149,6 +149,7 @@ export default function Otp() {
             setLoading(false)
             toast.error('Account not created!')
         }
+        // navigate('/login', { state: { status: true } })
     }
 
     const otpForm = () => {

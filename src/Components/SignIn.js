@@ -123,8 +123,14 @@ export default function SignIn() {
         }
     }
 
+    React.useEffect(() => {
+        if (status) {
+            toast.success('Login to your account!')
+        }
+    }, [])
+
     return (
-        <div className='root' style={{ height: '100%', background:  'white' }}>
+        <div className='root' style={{ height: '100%', background: 'white' }}>
             <ToastContainer />
             {
                 loadingPage ?
