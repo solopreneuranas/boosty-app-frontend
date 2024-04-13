@@ -81,7 +81,7 @@ export default function CompanyDetails(props) {
     const companyInfo = [
         {
             title: 'Company Address',
-            para:  company.agentaddress
+            para: company.agentaddress
         },
         {
             title: 'Company Status',
@@ -286,7 +286,12 @@ export default function CompanyDetails(props) {
                                         </Grid>
                                     </Grid>
                                 </div>
-                                {allMembers()}
+                                {
+                                    membersDataArray[0] ?
+                                        <>{allMembers()}</>
+                                        :
+                                        <></>
+                                }
                             </div>
                         )
                     })
